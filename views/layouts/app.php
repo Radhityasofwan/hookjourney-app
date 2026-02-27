@@ -88,8 +88,11 @@ $current = current_uri();
 
     <!-- Script anti-kedip (FOUC) mendeteksi tema HP pengguna -->
     <script>
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
         }
         if (window.innerWidth >= 992 && localStorage.getItem('sidebarState') === 'collapsed') {
             document.documentElement.classList.add('sidebar-collapsed');
@@ -579,32 +582,43 @@ $current = current_uri();
         }
 
         main table {
-            color: rgba(255, 255, 255, 0.9) !important;
+            color: inherit !important;
         }
 
         main th {
             background: transparent !important;
-            color: #fff !important;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+            border-bottom: 1px solid rgba(128, 128, 128, 0.2) !important;
             font-weight: 600;
         }
 
         main td {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
-            color: rgba(255, 255, 255, 0.7) !important;
+            border-bottom: 1px solid rgba(128, 128, 128, 0.1) !important;
         }
 
-        main .text-gray-900,
-        main .text-gray-800,
-        main .text-dark {
-            color: #ffffff !important;
+        /* --- SMART TEXT CONTRAST FOR LIGHT MODE --- */
+        /* Menyesuaikan text-white statis menjadi gelap di Light Mode, kecuali di dalam tombol atau elemen ber-background */
+        html:not(.dark) main .text-white:not(.btn):not(button):not([class*="btn-"]):not([class*="bg-"]) {
+            color: #1c1c1e !important;
+        }
+        
+        html:not(.dark) main [class*="text-white/"]:not(.btn):not(button):not([class*="btn-"]):not([class*="bg-"]) {
+            color: rgba(28, 28, 30, 0.6) !important;
         }
 
-        main .text-gray-600,
-        main .text-gray-500,
-        main .text-muted {
-            color: rgba(255, 255, 255, 0.55) !important;
+        /* Adaptasi warna teks pastel menjadi gelap (High Contrast) di Light Mode */
+        html:not(.dark) main [class*="text-purple-300"], html:not(.dark) main [class*="text-purple-200"], html:not(.dark) main [class*="text-purple-400"] {
+            color: #6b21a8 !important; /* purple-800 */
         }
+        html:not(.dark) main [class*="text-blue-300"], html:not(.dark) main [class*="text-blue-200"], html:not(.dark) main [class*="text-blue-400"] {
+            color: #1e40af !important; /* blue-800 */
+        }
+        html:not(.dark) main [class*="text-emerald-300"], html:not(.dark) main [class*="text-emerald-400"], html:not(.dark) main [class*="text-emerald-200"] {
+            color: #065f46 !important; /* emerald-800 */
+        }
+        html:not(.dark) main [class*="text-pink-300"], html:not(.dark) main [class*="text-pink-400"], html:not(.dark) main [class*="text-pink-200"] {
+            color: #9d174d !important; /* pink-800 */
+        }
+
 
         .capsule-alert {
             background: rgba(255, 255, 255, 0.1);
@@ -864,6 +878,14 @@ $current = current_uri();
                         style="font-size: 0.95rem; line-height: 1.2;"></p>
                     <p class="mb-0 text-white-50" style="font-size: 0.7rem;"><?= date('D, d M Y') ?></p>
                 </div>
+
+                <!-- THEME TOGGLE -->
+                <button onclick="toggleTheme()"
+                    class="btn-glass p-0 d-flex align-items-center justify-content-center position-relative shadow-none border-0"
+                    style="width: 38px; height: 38px;" title="Toggle Dark/Light Mode">
+                    <i id="theme-toggle-icon" class="ph ph-moon fs-5"></i>
+                </button>
+
                 <button
                     class="btn-glass p-0 d-flex align-items-center justify-content-center position-relative shadow-none border-0"
                     style="width: 38px; height: 38px;">
@@ -932,7 +954,8 @@ $current = current_uri();
     </div>
 
     <!-- FLOATING BOTTOM NAVIGATION PILL (MOBILE ONLY) -->
-    <nav class="mobile-bottom-nav bg-white/70 dark:bg-black/70 border-t border-black/5 dark:border-white/10" hx-boost="true" hx-target="#content-body" hx-indicator="#ios-loader">
+    <nav class="mobile-bottom-nav bg-white/70 dark:bg-black/70 border-t border-black/5 dark:border-white/10"
+        hx-boost="true" hx-target="#content-body" hx-indicator="#ios-loader">
         <a href="<?= base_url('dashboard') ?>"
             class="nav-item-mobile spa-link <?= $current == 'dashboard' ? 'active' : '' ?>">
             <i class="<?= $current == 'dashboard' ? 'ph-fill' : 'ph' ?> ph-house"></i>
@@ -997,6 +1020,34 @@ $current = current_uri();
 
     <!-- PWA Service Worker Registration -->
     <script>
+        // Theme Toggle Script
+        function toggleTheme() {
+            const html = document.documentElement;
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                updateThemeIcon();
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeIcon();
+            }
+        }
+
+        function updateThemeIcon() {
+            const icon = document.getElementById('theme-toggle-icon');
+            if (icon) {
+                if (document.documentElement.classList.contains('dark')) {
+                    icon.className = 'ph-fill ph-moon fs-5 text-indigo-400';
+                } else {
+                    icon.className = 'ph-bold ph-sun fs-5 text-amber-500';
+                }
+            }
+        }
+
+        // Initialize icon
+        updateThemeIcon();
+
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('<?= base_url('sw.js') ?>')
