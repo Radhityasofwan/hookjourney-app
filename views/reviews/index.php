@@ -6,13 +6,13 @@
 </div>
 
 <?php if(isset($success_msg)): ?>
-    <div class="mb-6 p-4 rounded-[50px] bg-emerald-500/10 border border-emerald-500/20 text-sm text-emerald-300 flex items-center shadow-lg backdrop-blur-md relative z-40">
+    <div class="mb-6 p-4 rounded-[50px] bg-emerald-500/10 border-emerald-500/20 text-sm text-emerald-300 flex items-center backdrop-blur-md relative z-40">
         <i class="ph-fill ph-check-circle text-xl mr-3 text-emerald-400"></i> <?= htmlspecialchars($success_msg) ?>
     </div>
 <?php endif; ?>
 
 <?php if(isset($error_msg)): ?>
-    <div class="mb-6 p-4 rounded-[50px] bg-red-500/10 border border-red-500/20 text-sm text-red-300 flex items-center shadow-lg backdrop-blur-md relative z-40">
+    <div class="mb-6 p-4 rounded-[50px] bg-red-500/10 border-red-500/20 text-sm text-red-300 flex items-center backdrop-blur-md relative z-40">
         <i class="ph-fill ph-warning-circle text-xl mr-3 text-red-400"></i> <?= htmlspecialchars($error_msg) ?>
     </div>
 <?php endif; ?>
@@ -21,8 +21,8 @@
     
     <!-- WIZARD GENERATOR KIRI -->
     <div class="lg:col-span-4">
-        <div class="bg-white/5 backdrop-blur-xl p-6 rounded-[28px] border border-white/10 shadow-lg sticky top-6">
-            <h3 class="font-bold text-white/90 mb-2 border-b border-white/10 pb-3 flex items-center text-sm uppercase tracking-wider">
+        <div class="bg-ios-cardLight dark:bg-ios-cardDark backdrop-blur-3xl shadow-[0_4px_24px_rgba(0,0,0,0.04)] dark:shadow-none active:scale-[0.98] transition-transform duration-200 p-6 rounded-[28px] sticky top-6">
+            <h3 class="font-bold text-white/90 mb-2 border-b pb-3 flex items-center text-sm uppercase tracking-wider">
                 <i class="ph-fill ph-magic-wand mr-2 text-purple-400 text-lg"></i> Generate Review Baru
             </h3>
             <p class="text-xs text-white/50 mb-6 leading-relaxed">Sistem akan menarik data performa Ads, status pembuatan konten, SEO, dan tiket operasional secara otomatis.</p>
@@ -30,11 +30,11 @@
             <form action="<?= base_url('reviews/generate') ?>" method="POST" class="space-y-5">
                 <div>
                     <label class="block text-xs font-semibold text-white/60 mb-2 uppercase tracking-wide">Mulai Tanggal (Senin)</label>
-                    <input type="date" name="week_start_date" value="<?= date('Y-m-d', strtotime('last monday')) ?>" class="w-full px-4 py-3 bg-black/30 border border-white/10 rounded-2xl text-white focus:ring-2 focus:ring-white/20 focus:border-white/30 outline-none transition-all text-sm [color-scheme:dark]" required>
+                    <input type="date" name="week_start_date" value="<?= date('Y-m-d', strtotime('last monday')) ?>" class="w-full px-4 py-3 bg-black/30 rounded-2xl text-white focus:ring-2 focus:ring-white/20 focus: outline-none transition-all text-sm [color-scheme:dark]" required>
                 </div>
                 <div>
                     <label class="block text-xs font-semibold text-white/60 mb-2 uppercase tracking-wide">Sampai Tanggal (Minggu)</label>
-                    <input type="date" name="week_end_date" value="<?= date('Y-m-d', strtotime('last sunday')) ?>" class="w-full px-4 py-3 bg-black/30 border border-white/10 rounded-2xl text-white focus:ring-2 focus:ring-white/20 focus:border-white/30 outline-none transition-all text-sm [color-scheme:dark]" required>
+                    <input type="date" name="week_end_date" value="<?= date('Y-m-d', strtotime('last sunday')) ?>" class="w-full px-4 py-3 bg-black/30 rounded-2xl text-white focus:ring-2 focus:ring-white/20 focus: outline-none transition-all text-sm [color-scheme:dark]" required>
                 </div>
                 
                 <div class="pt-2">
@@ -48,8 +48,8 @@
 
     <!-- RIWAYAT REVIEW KANAN -->
     <div class="lg:col-span-8">
-        <div class="bg-white/5 backdrop-blur-xl rounded-[28px] border border-white/10 shadow-lg overflow-hidden flex flex-col h-full">
-            <div class="px-6 py-5 border-b border-white/10 bg-transparent">
+        <div class="bg-ios-cardLight dark:bg-ios-cardDark backdrop-blur-3xl shadow-[0_4px_24px_rgba(0,0,0,0.04)] dark:shadow-none active:scale-[0.98] transition-transform duration-200 rounded-[28px] overflow-hidden flex flex-col h-full">
+            <div class="px-6 py-5 border-b bg-transparent">
                 <h3 class="font-bold text-white/90 text-sm uppercase tracking-wider">Riwayat Laporan</h3>
             </div>
             
@@ -72,13 +72,13 @@
                             </div>
                             <div class="flex items-center space-x-3">
                                 <?php if($r['review_status'] == 'published'): ?>
-                                    <span class="bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 px-3 py-1 text-[10px] rounded-full font-bold uppercase tracking-wider backdrop-blur-md">Published</span>
-                                    <a href="#" class="flex items-center justify-center w-9 h-9 bg-white/10 border border-white/20 rounded-full text-white hover:bg-white/20 transition-all shadow-sm" title="Client Link">
+                                    <span class="bg-emerald-500/20 border-emerald-500/30 text-emerald-300 px-3 py-1 text-[10px] rounded-full font-bold uppercase tracking-wider backdrop-blur-md">Published</span>
+                                    <a href="#" class="flex items-center justify-center w-9 h-9 bg-white/10 rounded-full text-white hover:bg-white/20 transition-all" title="Client Link">
                                         <i class="ph-bold ph-link text-base"></i>
                                     </a>
                                 <?php else: ?>
-                                    <span class="bg-orange-500/20 border border-orange-500/30 text-orange-300 px-3 py-1 text-[10px] rounded-full font-bold uppercase tracking-wider backdrop-blur-md">Draft</span>
-                                    <a href="<?= base_url('reviews/edit?id=' . $r['id']) ?>" class="flex items-center px-4 py-2 bg-white/10 border border-white/20 rounded-full text-white text-xs font-semibold hover:bg-white/20 transition-all shadow-sm">
+                                    <span class="bg-orange-500/20 border-orange-500/30 text-orange-300 px-3 py-1 text-[10px] rounded-full font-bold uppercase tracking-wider backdrop-blur-md">Draft</span>
+                                    <a href="<?= base_url('reviews/edit?id=' . $r['id']) ?>" class="flex items-center px-4 py-2 bg-white/10 rounded-full text-white text-xs font-semibold hover:bg-white/20 transition-all">
                                         <i class="ph-bold ph-pencil-simple mr-1.5"></i> Lanjutkan
                                     </a>
                                 <?php endif; ?>
@@ -87,7 +87,7 @@
                                 <?php if($user['role_global'] === 'leader'): ?>
                                     <form action="<?= base_url('reviews/delete') ?>" method="POST" class="m-0" onsubmit="return confirm('Yakin ingin menghapus evaluasi ini secara permanen?')">
                                         <input type="hidden" name="id" value="<?= $r['id'] ?>">
-                                        <button type="submit" class="flex items-center justify-center w-9 h-9 bg-red-500/10 border border-red-500/20 rounded-full text-red-400 hover:bg-red-500/20 transition-all shadow-sm" title="Hapus Laporan">
+                                        <button type="submit" class="flex items-center justify-center w-9 h-9 bg-red-500/10 border-red-500/20 rounded-full text-red-400 hover:bg-red-500/20 transition-all" title="Hapus Laporan">
                                             <i class="ph-bold ph-trash text-sm"></i>
                                         </button>
                                     </form>

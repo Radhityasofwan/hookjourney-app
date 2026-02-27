@@ -8,7 +8,7 @@
 
 <?php if (isset($success_msg)): ?>
     <div
-        class="mb-6 p-4 rounded-[50px] bg-emerald-500/10 border border-emerald-500/20 text-sm text-emerald-300 flex items-center shadow-lg backdrop-blur-md relative z-40">
+        class="mb-6 p-4 rounded-[50px] bg-emerald-500/10 border-emerald-500/20 text-sm text-emerald-300 flex items-center backdrop-blur-md relative z-40">
         <i class="ph-fill ph-check-circle text-xl mr-3 text-emerald-400"></i> <?= htmlspecialchars($success_msg) ?>
     </div>
 <?php endif; ?>
@@ -17,9 +17,9 @@
 
     <!-- Form Buat Thread Kiri -->
     <div class="lg:col-span-4">
-        <div class="bg-white/5 backdrop-blur-xl p-6 rounded-[28px] border border-white/10 shadow-lg sticky top-6">
+        <div class="bg-ios-cardLight dark:bg-ios-cardDark backdrop-blur-3xl shadow-[0_4px_24px_rgba(0,0,0,0.04)] dark:shadow-none active:scale-[0.98] transition-transform duration-200 p-6 rounded-[28px] sticky top-6">
             <h3
-                class="font-bold text-white/90 mb-5 border-b border-white/10 pb-3 flex items-center text-sm uppercase tracking-wider">
+                class="font-bold text-white/90 mb-5 border-b pb-3 flex items-center text-sm uppercase tracking-wider">
                 <i class="ph-fill ph-chat-circle-text mr-2 text-blue-400 text-lg"></i> Buat Topik Baru
             </h3>
             <form action="<?= base_url('forum/store') ?>" method="POST" class="space-y-5">
@@ -27,14 +27,14 @@
                     <label class="block text-xs font-semibold text-white/60 mb-2 uppercase tracking-wide">Judul Diskusi
                         <span class="text-red-400">*</span></label>
                     <input type="text" name="title"
-                        class="w-full px-4 py-3 bg-black/30 border border-white/10 rounded-2xl text-white focus:ring-2 focus:ring-white/20 focus:border-white/30 outline-none transition-all text-sm placeholder-white/30"
+                        class="w-full px-4 py-3 bg-black/30 rounded-2xl text-white focus:ring-2 focus:ring-white/20 focus: outline-none transition-all text-sm placeholder-white/30"
                         required placeholder="Tulis judul topik...">
                 </div>
                 <div>
                     <label class="block text-xs font-semibold text-white/60 mb-2 uppercase tracking-wide">Kategori
                         (Opsional)</label>
                     <select name="category_id"
-                        class="w-full px-4 py-3 bg-black/30 border border-white/10 rounded-2xl text-white focus:ring-2 focus:ring-white/20 focus:border-white/30 outline-none transition-all text-sm appearance-none cursor-pointer">
+                        class="w-full px-4 py-3 bg-black/30 rounded-2xl text-white focus:ring-2 focus:ring-white/20 focus: outline-none transition-all text-sm appearance-none cursor-pointer">
                         <option value="" class="bg-gray-900 text-white/50">-- Tanpa Kategori --</option>
                         <?php foreach ($categories as $cat): ?>
                             <option value="<?= $cat['id'] ?>" class="bg-gray-900 text-white">
@@ -46,7 +46,7 @@
                     <label class="block text-xs font-semibold text-white/60 mb-2 uppercase tracking-wide">Pesan Pembuka
                         <span class="text-red-400">*</span></label>
                     <textarea name="post_text" rows="5"
-                        class="w-full px-4 py-3 bg-black/30 border border-white/10 rounded-2xl text-white focus:ring-2 focus:ring-white/20 focus:border-white/30 outline-none transition-all text-sm placeholder-white/30 resize-none"
+                        class="w-full px-4 py-3 bg-black/30 rounded-2xl text-white focus:ring-2 focus:ring-white/20 focus: outline-none transition-all text-sm placeholder-white/30 resize-none"
                         required placeholder="Jelaskan detail diskusi yang ingin dibahas..."></textarea>
                 </div>
                 <div class="pt-2">
@@ -63,7 +63,7 @@
     <div class="lg:col-span-8 space-y-4">
         <?php if (empty($threads)): ?>
             <div
-                class="bg-white/5 backdrop-blur-xl p-12 rounded-[28px] border border-white/10 shadow-lg text-center text-white/40 flex flex-col items-center justify-center min-h-[300px]">
+                class="bg-ios-cardLight dark:bg-ios-cardDark backdrop-blur-3xl shadow-[0_4px_24px_rgba(0,0,0,0.04)] dark:shadow-none active:scale-[0.98] transition-transform duration-200 p-12 rounded-[28px] text-center text-white/40 flex flex-col items-center justify-center min-h-[300px]">
                 <i class="ph-fill ph-chats text-6xl mb-4 text-white/20"></i>
                 <p class="text-sm font-medium">Belum ada topik diskusi.</p>
                 <p class="text-xs mt-1 text-white/30">Jadilah yang pertama memulai obrolan dengan tim Anda!</p>

@@ -6,7 +6,7 @@
 </div>
 
 <?php if(isset($success_msg)): ?>
-    <div class="mb-6 p-4 rounded-[50px] bg-emerald-500/10 border border-emerald-500/20 text-sm text-emerald-300 flex items-center shadow-lg backdrop-blur-md relative z-40">
+    <div class="mb-6 p-4 rounded-[50px] bg-emerald-500/10 border-emerald-500/20 text-sm text-emerald-300 flex items-center backdrop-blur-md relative z-40">
         <i class="ph-fill ph-check-circle text-xl mr-3 text-emerald-400"></i> <?= htmlspecialchars($success_msg) ?>
     </div>
 <?php endif; ?>
@@ -15,22 +15,22 @@
     
     <!-- Form Generate Link (Kiri) -->
     <div class="lg:col-span-4">
-        <form action="<?= base_url('share-links/generate') ?>" method="POST" class="bg-white/5 backdrop-blur-xl p-6 rounded-[28px] border border-white/10 shadow-lg sticky top-6">
-            <h3 class="font-bold text-white/90 mb-5 border-b border-white/10 pb-3 flex items-center text-sm uppercase tracking-wider">
+        <form action="<?= base_url('share-links/generate') ?>" method="POST" class="bg-ios-cardLight dark:bg-ios-cardDark backdrop-blur-3xl shadow-[0_4px_24px_rgba(0,0,0,0.04)] dark:shadow-none active:scale-[0.98] transition-transform duration-200 p-6 rounded-[28px] sticky top-6">
+            <h3 class="font-bold text-white/90 mb-5 border-b pb-3 flex items-center text-sm uppercase tracking-wider">
                 <i class="ph-bold ph-link mr-2 text-blue-400 text-lg"></i> Buat Tautan Baru
             </h3>
             
             <div class="space-y-5">
                 <div>
                     <label class="block text-xs font-semibold text-white/60 mb-2 uppercase tracking-wide">Modul yang Dibagikan</label>
-                    <select name="module_key" class="w-full px-4 py-3 bg-black/30 border border-white/10 rounded-2xl text-white focus:ring-2 focus:ring-white/20 focus:border-white/30 outline-none transition-all text-sm appearance-none cursor-pointer">
+                    <select name="module_key" class="w-full px-4 py-3 bg-black/30 rounded-2xl text-white focus:ring-2 focus:ring-white/20 focus: outline-none transition-all text-sm appearance-none cursor-pointer">
                         <option value="weekly_review" class="bg-gray-900 text-white">Laporan Mingguan (Weekly Review)</option>
                         <option value="dashboard" class="bg-gray-900 text-white">Dashboard Ads Performa</option>
                     </select>
                 </div>
                 <div>
                     <label class="block text-xs font-semibold text-white/60 mb-2 uppercase tracking-wide">Berlaku Hingga (Opsional)</label>
-                    <input type="date" name="expires_at" class="w-full px-4 py-3 bg-black/30 border border-white/10 rounded-2xl text-white focus:ring-2 focus:ring-white/20 focus:border-white/30 outline-none transition-all text-sm [color-scheme:dark]">
+                    <input type="date" name="expires_at" class="w-full px-4 py-3 bg-black/30 rounded-2xl text-white focus:ring-2 focus:ring-white/20 focus: outline-none transition-all text-sm [color-scheme:dark]">
                     <p class="text-[10px] text-white/40 mt-2 flex items-center"><i class="ph-fill ph-info mr-1"></i> Biarkan kosong agar tautan aktif selamanya.</p>
                 </div>
                 <div class="pt-2">
@@ -44,10 +44,10 @@
 
     <!-- Tabel Data Link (Kanan) -->
     <div class="lg:col-span-8">
-        <div class="bg-white/5 backdrop-blur-xl rounded-[28px] border border-white/10 shadow-lg overflow-hidden h-full flex flex-col">
-            <div class="px-6 py-5 border-b border-white/10 bg-transparent flex justify-between items-center">
+        <div class="bg-ios-cardLight dark:bg-ios-cardDark backdrop-blur-3xl shadow-[0_4px_24px_rgba(0,0,0,0.04)] dark:shadow-none active:scale-[0.98] transition-transform duration-200 rounded-[28px] overflow-hidden h-full flex flex-col">
+            <div class="px-6 py-5 border-b bg-transparent flex justify-between items-center">
                 <h3 class="font-bold text-white/90 text-sm uppercase tracking-wider">Daftar Akses Aktif</h3>
-                <span class="text-xs font-medium bg-black/30 px-3 py-1 rounded-lg text-white/50 border border-white/5"><?= count($links) ?> Tautan</span>
+                <span class="text-xs font-medium bg-black/30 px-3 py-1 rounded-2xl text-white/50"><?= count($links) ?> Tautan</span>
             </div>
             
             <div class="overflow-x-auto scrollbar-hide flex-grow">
@@ -81,13 +81,13 @@
                                     
                                     <td class="px-6 py-4">
                                         <div class="flex items-center w-full min-w-[280px]">
-                                            <input type="text" value="<?= $url ?>" class="bg-black/30 border border-white/10 text-xs text-white/70 rounded-xl px-3 py-2.5 w-full outline-none focus:text-white transition-colors cursor-text" readonly id="link-<?= $l['id'] ?>">
+                                            <input type="text" value="<?= $url ?>" class="bg-black/30 text-xs text-white/70 rounded-xl px-3 py-2.5 w-full outline-none focus:text-white transition-colors cursor-text" readonly id="link-<?= $l['id'] ?>">
                                             
-                                            <button type="button" onclick="copyLink(this, '<?= $url ?>')" class="flex-shrink-0 flex items-center justify-center w-9 h-9 rounded-xl bg-white/10 hover:bg-white/20 text-white transition-all shadow-sm ml-2" title="Salin Tautan">
+                                            <button type="button" onclick="copyLink(this, '<?= $url ?>')" class="flex-shrink-0 flex items-center justify-center w-9 h-9 rounded-xl bg-white/10 hover:bg-white/20 text-white transition-all ml-2" title="Salin Tautan">
                                                 <i class="ph-bold ph-copy text-sm"></i>
                                             </button>
                                             
-                                            <a href="<?= $url ?>" target="_blank" class="flex-shrink-0 flex items-center justify-center w-9 h-9 rounded-xl bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 transition-all shadow-sm ml-2" title="Kunjungi Tautan">
+                                            <a href="<?= $url ?>" target="_blank" class="flex-shrink-0 flex items-center justify-center w-9 h-9 rounded-xl bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 transition-all ml-2" title="Kunjungi Tautan">
                                                 <i class="ph-bold ph-arrow-square-out text-sm"></i>
                                             </a>
                                         </div>
@@ -95,11 +95,11 @@
                                     
                                     <td class="px-6 py-4 text-xs font-medium text-white/50 whitespace-nowrap">
                                         <?php if($l['expires_at']): ?>
-                                            <span class="flex items-center text-orange-300 bg-orange-500/10 px-2.5 py-1 rounded-full border border-orange-500/20 backdrop-blur-md w-max">
+                                            <span class="flex items-center text-orange-300 bg-orange-500/10 px-2.5 py-1 rounded-full border-orange-500/20 backdrop-blur-md w-max">
                                                 <i class="ph-fill ph-clock mr-1.5"></i> <?= date('d M Y', strtotime($l['expires_at'])) ?>
                                             </span>
                                         <?php else: ?>
-                                            <span class="flex items-center text-emerald-300 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20 backdrop-blur-md w-max">
+                                            <span class="flex items-center text-emerald-300 bg-emerald-500/10 px-2.5 py-1 rounded-full border-emerald-500/20 backdrop-blur-md w-max">
                                                 <i class="ph-fill ph-infinity mr-1.5"></i> Selamanya
                                             </span>
                                         <?php endif; ?>
@@ -110,7 +110,7 @@
                                     <td class="px-6 py-4 text-center whitespace-nowrap">
                                         <form action="<?= base_url('share-links/delete') ?>" method="POST" class="m-0 inline-block" onsubmit="return confirm('Cabut tautan ini? Klien tidak akan bisa mengaksesnya lagi.')">
                                             <input type="hidden" name="id" value="<?= $l['id'] ?>">
-                                            <button type="submit" class="flex items-center justify-center w-9 h-9 rounded-xl bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 text-red-400 transition-colors shadow-sm" title="Cabut Akses">
+                                            <button type="submit" class="flex items-center justify-center w-9 h-9 rounded-xl bg-red-500/10 hover:bg-red-500/20 border-red-500/20 text-red-400 transition-colors" title="Cabut Akses">
                                                 <i class="ph-bold ph-link-break text-sm"></i>
                                             </button>
                                         </form>
@@ -140,12 +140,12 @@
         const icon = btn.querySelector('i');
         icon.className = 'ph-bold ph-check text-emerald-400 text-lg';
         btn.classList.replace('bg-white/10', 'bg-emerald-500/20');
-        btn.classList.add('border', 'border-emerald-500/30');
+        btn.classList.add('', 'border-emerald-500/30');
         
         setTimeout(() => { 
             icon.className = 'ph-bold ph-copy text-sm text-white'; 
             btn.classList.replace('bg-emerald-500/20', 'bg-white/10');
-            btn.classList.remove('border', 'border-emerald-500/30');
+            btn.classList.remove('', 'border-emerald-500/30');
         }, 2000);
     }
 </script>

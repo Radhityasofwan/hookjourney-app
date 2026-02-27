@@ -74,12 +74,12 @@
     <header class="glass-topbar sticky top-0 z-50">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-16 md:h-20 flex items-center justify-between">
             <div class="flex items-center">
-                <div class="h-9 w-9 md:h-10 md:w-10 rounded-2xl bg-white/10 border border-white/20 text-white flex items-center justify-center font-bold text-sm md:text-base mr-3 shadow-lg backdrop-blur-md">
+                <div class="h-9 w-9 md:h-10 md:w-10 rounded-2xl bg-white/10 text-white flex items-center justify-center font-bold text-sm md:text-base mr-3 backdrop-blur-md">
                     <?= strtoupper(substr($linkData['brand_name'] ?? 'B', 0, 1)) ?>
                 </div>
                 <span class="text-base md:text-lg font-bold text-white tracking-tight"><?= htmlspecialchars($linkData['brand_name'] ?? 'Brand') ?></span>
             </div>
-            <div class="text-[10px] md:text-xs font-semibold text-white/70 flex items-center bg-white/10 border border-white/10 px-3 py-1.5 rounded-full backdrop-blur-md uppercase tracking-wider">
+            <div class="text-[10px] md:text-xs font-semibold text-white/70 flex items-center bg-white/10 px-3 py-1.5 rounded-full backdrop-blur-md uppercase tracking-wider">
                 <i class="ph-bold ph-lock-key mr-1.5"></i> Read-Only
             </div>
         </div>
@@ -91,7 +91,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="text-center py-8 text-[10px] md:text-xs text-white/40 font-medium tracking-wider uppercase relative z-10 border-t border-white/5 mt-auto">
+    <footer class="text-center py-8 text-[10px] md:text-xs text-white/40 font-medium tracking-wider uppercase relative z-10 border-t mt-auto">
         Powered by <strong class="text-white/60"><?= APP_NAME ?></strong> • Premium Client Interface
     </footer>
 </body>

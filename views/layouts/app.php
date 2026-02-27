@@ -69,7 +69,7 @@ $availableBrands = $brandModel->getActiveBrandsByUser($user);
 $current = current_uri();
 ?>
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="antialiased">
 
 <head>
     <meta charset="UTF-8">
@@ -82,11 +82,15 @@ $current = current_uri();
 
     <!-- PWA & Mobile App Settings -->
     <link rel="manifest" href="<?= base_url('manifest.json') ?>">
-    <meta name="theme-color" content="#060609">
+    <meta name="theme-color" content="#F2F2F7" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
     <link rel="apple-touch-icon" href="<?= base_url('assets/icon-192.png') ?>">
 
-    <!-- Mencegah FOUC (Flash of Unstyled Content) dengan membaca state Sidebar dari LocalStorage -->
+    <!-- Script anti-kedip (FOUC) mendeteksi tema HP pengguna -->
     <script>
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
         if (window.innerWidth >= 992 && localStorage.getItem('sidebarState') === 'collapsed') {
             document.documentElement.classList.add('sidebar-collapsed');
         }
@@ -95,6 +99,28 @@ $current = current_uri();
     <!-- CSS ASSETS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+                    },
+                    colors: {
+                        ios: {
+                            bgLight: '#F2F2F7',
+                            bgDark: '#000000',
+                            cardLight: '#FFFFFF',
+                            cardDark: '#1C1C1E',
+                            blue: '#007AFF',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <script src="https://unpkg.com/htmx.org@1.9.10"></script>
@@ -112,12 +138,10 @@ $current = current_uri();
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #060609;
-            color: #ffffff;
+            /* Font will be handled by Tailwind mostly, this is fallback */
+            font-family: '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', sans-serif;
             margin: 0;
             overflow: hidden;
-            -webkit-font-smoothing: antialiased;
             -webkit-tap-highlight-color: transparent;
         }
 
@@ -619,7 +643,7 @@ $current = current_uri();
     </style>
 </head>
 
-<body>
+<body class="bg-ios-bgLight dark:bg-ios-bgDark text-black dark:text-white pb-safe transition-colors duration-300">
 
     <!-- Native App Progress Bar -->
     <div id="ios-loader"></div>
@@ -908,7 +932,7 @@ $current = current_uri();
     </div>
 
     <!-- FLOATING BOTTOM NAVIGATION PILL (MOBILE ONLY) -->
-    <nav class="mobile-bottom-nav" hx-boost="true" hx-target="#content-body" hx-indicator="#ios-loader">
+    <nav class="mobile-bottom-nav bg-white/70 dark:bg-black/70 border-t border-black/5 dark:border-white/10" hx-boost="true" hx-target="#content-body" hx-indicator="#ios-loader">
         <a href="<?= base_url('dashboard') ?>"
             class="nav-item-mobile spa-link <?= $current == 'dashboard' ? 'active' : '' ?>">
             <i class="<?= $current == 'dashboard' ? 'ph-fill' : 'ph' ?> ph-house"></i>

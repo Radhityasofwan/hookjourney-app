@@ -12,14 +12,14 @@
 </div>
 
 <?php if(isset($success_msg)): ?>
-    <div class="mb-6 p-4 rounded-[50px] bg-emerald-500/10 border border-emerald-500/20 text-sm text-emerald-300 flex items-center shadow-lg backdrop-blur-md relative z-40">
+    <div class="mb-6 p-4 rounded-[50px] bg-emerald-500/10 border-emerald-500/20 text-sm text-emerald-300 flex items-center backdrop-blur-md relative z-40">
         <i class="ph-fill ph-check-circle text-xl mr-3 text-emerald-400"></i> <?= htmlspecialchars($success_msg) ?>
     </div>
 <?php endif; ?>
 
-<div class="bg-white/5 backdrop-blur-xl rounded-[24px] border border-white/10 shadow-lg overflow-hidden relative z-40 flex flex-col min-h-[60vh]">
+<div class="bg-ios-cardLight dark:bg-ios-cardDark backdrop-blur-3xl shadow-[0_4px_24px_rgba(0,0,0,0.04)] dark:shadow-none active:scale-[0.98] transition-transform duration-200 rounded-[24px] overflow-hidden relative z-40 flex flex-col min-h-[60vh]">
     <!-- Filter Bar -->
-    <div class="px-6 py-4 border-b border-white/10 flex justify-between items-center bg-white/5">
+    <div class="px-6 py-4 border-b flex justify-between items-center bg-white/5">
         <div class="text-sm text-white/60 flex items-center font-medium"><i class="ph-bold ph-funnel mr-2"></i> Filter: <?= $user['role_global'] === 'leader' ? 'Semua Tugas' : 'Tugas Milik Saya' ?></div>
         <div class="text-xs text-white/40"><i class="ph-fill ph-info mr-1"></i> Ubah status langsung dari tabel</div>
     </div>
@@ -67,7 +67,7 @@
                                 <?php endif; ?>
                             </div>
                             <?php if($t['category_name']): ?>
-                                <span class="text-[9px] font-bold uppercase tracking-widest text-white/50 inline-flex items-center bg-white/10 px-2 py-0.5 rounded border border-white/10 backdrop-blur-sm"><i class="ph-fill ph-tag mr-1 text-white/40"></i> <?= htmlspecialchars($t['category_name']) ?></span>
+                                <span class="text-[9px] font-bold uppercase tracking-widest text-white/50 inline-flex items-center bg-white/10 px-2 py-0.5 rounded backdrop-blur-sm"><i class="ph-fill ph-tag mr-1 text-white/40"></i> <?= htmlspecialchars($t['category_name']) ?></span>
                             <?php endif; ?>
                         </td>
                         
@@ -75,16 +75,16 @@
                         <td class="px-6 py-4 whitespace-nowrap" onclick="event.stopPropagation()">
                             <?php
                                 $sColor = [
-                                    'open' => 'bg-white/10 text-white border-white/20',
+                                    'open' => 'bg-white/10 text-white ',
                                     'in_progress' => 'bg-blue-500/20 text-blue-300 border-blue-500/30',
                                     'review' => 'bg-purple-500/20 text-purple-300 border-purple-500/30',
                                     'done' => 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
                                     'blocked' => 'bg-red-500/20 text-red-300 border-red-500/30',
-                                    'cancelled' => 'bg-gray-500/20 text-gray-400 border-gray-500/30'
-                                ][$t['ticket_status']] ?? 'bg-white/10 text-white/80 border-white/20';
+                                    'cancelled' => 'bg-gray-500/20 text-gray-400 '
+                                ][$t['ticket_status']] ?? 'bg-white/10 text-white/80 ';
                             ?>
                             <div class="relative inline-flex items-center">
-                                <select onchange="updateTicketStatus(<?= $t['id'] ?>, this.value)" class="appearance-none bg-transparent border text-[10px] font-bold uppercase tracking-wider py-1 pl-3 pr-7 rounded-full cursor-pointer focus:outline-none <?= $sColor ?> backdrop-blur-md transition-all shadow-sm">
+                                <select onchange="updateTicketStatus(<?= $t['id'] ?>, this.value)" class="appearance-none bg-transparent text-[10px] font-bold uppercase tracking-wider py-1 pl-3 pr-7 rounded-full cursor-pointer focus:outline-none <?= $sColor ?> backdrop-blur-md transition-all">
                                     <option value="open" class="bg-gray-900 text-white" <?= $t['ticket_status'] == 'open' ? 'selected' : '' ?>>OPEN</option>
                                     <option value="in_progress" class="bg-gray-900 text-white" <?= $t['ticket_status'] == 'in_progress' ? 'selected' : '' ?>>IN PROGRESS</option>
                                     <option value="review" class="bg-gray-900 text-white" <?= $t['ticket_status'] == 'review' ? 'selected' : '' ?>>REVIEW</option>
@@ -112,9 +112,9 @@
                             <?php if($t['assignee_name']): ?>
                                 <div class="flex items-center">
                                     <?php if (!empty($t['assignee_avatar'])): ?>
-                                        <img src="<?= base_url($t['assignee_avatar']) ?>?v=<?= time() ?>" class="w-7 h-7 rounded-full object-cover shadow-sm border border-white/20 mr-2.5 shrink-0" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=<?= urlencode($t['assignee_name']) ?>&background=4361ee&color=fff';">
+                                        <img src="<?= base_url($t['assignee_avatar']) ?>?v=<?= time() ?>" class="w-7 h-7 rounded-full object-cover mr-2.5 shrink-0" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=<?= urlencode($t['assignee_name']) ?>&background=4361ee&color=fff';">
                                     <?php else: ?>
-                                        <div class="h-7 w-7 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-[10px] font-bold text-white shadow-sm border border-white/20 mr-2.5 shrink-0">
+                                        <div class="h-7 w-7 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-[10px] font-bold text-white mr-2.5 shrink-0">
                                             <?= strtoupper(substr($t['assignee_name'], 0, 1)) ?>
                                         </div>
                                     <?php endif; ?>
@@ -126,14 +126,14 @@
                                             $dateStr = $t['due_at'] ? date('d M Y', strtotime($t['due_at'])) : 'Tanpa Tenggat';
                                             $waText = urlencode("Halo " . explode(' ', $t['assignee_name'])[0] . ", reminder untuk tugas tiket *" . $t['title'] . "* (Due: " . $dateStr . "). Mohon di-update progressnya ya. Semangat! 🚀");
                                         ?>
-                                        <a href="https://wa.me/<?= preg_replace('/[^0-9]/', '', $t['assignee_phone']) ?>?text=<?= $waText ?>" target="_blank" class="text-emerald-400 bg-emerald-500/10 w-6 h-6 flex items-center justify-center rounded-full hover:bg-emerald-500/20 hover:scale-110 transition-all border border-emerald-500/20 ml-3 shrink-0" title="Ping Reminder via WA">
+                                        <a href="https://wa.me/<?= preg_replace('/[^0-9]/', '', $t['assignee_phone']) ?>?text=<?= $waText ?>" target="_blank" class="text-emerald-400 bg-emerald-500/10 w-6 h-6 flex items-center justify-center rounded-full hover:bg-emerald-500/20 hover:scale-110 transition-all border-emerald-500/20 ml-3 shrink-0" title="Ping Reminder via WA">
                                             <i class="ph-fill ph-whatsapp-logo text-[12px]"></i>
                                         </a>
                                     <?php endif; ?>
                                 </div>
                             <?php else: ?>
                                 <div class="flex items-center text-white/40">
-                                    <div class="h-7 w-7 rounded-full bg-white/5 border border-dashed border-white/20 flex items-center justify-center mr-2.5"><i class="ph-fill ph-user text-xs"></i></div>
+                                    <div class="h-7 w-7 rounded-full bg-white/5 flex items-center justify-center mr-2.5"><i class="ph-fill ph-user text-xs"></i></div>
                                     <span class="text-xs font-medium italic">Unassigned</span>
                                 </div>
                             <?php endif; ?>
@@ -154,12 +154,12 @@
                         <?php if($user['role_global'] === 'leader'): ?>
                         <td class="px-6 py-4 text-center whitespace-nowrap" onclick="event.stopPropagation()">
                             <div class="flex items-center justify-center gap-1.5">
-                                <a href="<?= base_url('tickets/edit?id='.$t['id']) ?>" class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 transition-colors border border-blue-500/20" title="Edit Detail">
+                                <a href="<?= base_url('tickets/edit?id='.$t['id']) ?>" class="inline-flex items-center justify-center w-8 h-8 rounded-2xl bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 transition-colors border-blue-500/20" title="Edit Detail">
                                     <i class="ph-bold ph-pencil-simple text-sm"></i>
                                 </a>
                                 <form action="<?= base_url('tickets/delete') ?>" method="POST" class="inline-block m-0" onsubmit="return confirm('Hapus tugas ini permanen?')">
                                     <input type="hidden" name="id" value="<?= $t['id'] ?>">
-                                    <button type="submit" class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-red-400 transition-colors border border-red-500/20" title="Hapus">
+                                    <button type="submit" class="inline-flex items-center justify-center w-8 h-8 rounded-2xl bg-red-500/10 hover:bg-red-500/20 text-red-400 transition-colors border-red-500/20" title="Hapus">
                                         <i class="ph-bold ph-trash text-sm"></i>
                                     </button>
                                 </form>
@@ -190,15 +190,15 @@
     <div class="absolute inset-0 bg-black/80 backdrop-blur-md cursor-pointer" onclick="closeTicketModal()"></div>
     
     <!-- Wrapper Modal -->
-    <div id="ticketContent" class="relative z-10 w-full max-w-5xl bg-[#111126] border border-white/10 rounded-3xl shadow-[0_25px_50px_rgba(0,0,0,0.5)] flex flex-col overflow-hidden scale-95 opacity-0 max-h-[90vh]">
+    <div id="ticketContent" class="relative z-10 w-full max-w-5xl bg-[#111126] rounded-3xl shadow-[0_25px_50px_rgba(0,0,0,0.5)] flex flex-col overflow-hidden scale-95 opacity-0 max-h-[90vh]">
         
         <!-- Header Controls -->
-        <div class="px-6 py-4 border-b border-white/10 bg-white/5 flex justify-between items-center shrink-0">
+        <div class="px-6 py-4 border-b bg-white/5 flex justify-between items-center shrink-0">
             <div class="flex items-center gap-3">
                 <span id="mdl-ticket-no" class="text-blue-400 font-bold text-sm tracking-wider"></span>
-                <span id="mdl-category" class="px-2 py-0.5 text-[9px] uppercase font-bold rounded border border-white/10 bg-white/10 text-white tracking-widest hidden"></span>
+                <span id="mdl-category" class="px-2 py-0.5 text-[9px] uppercase font-bold rounded bg-white/10 text-white tracking-widest hidden"></span>
             </div>
-            <button onclick="closeTicketModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-red-500/20 text-white/70 hover:text-red-400 flex items-center justify-center transition-all border border-transparent hover:border-red-500/30">
+            <button onclick="closeTicketModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-red-500/20 text-white/70 hover:text-red-400 flex items-center justify-center transition-all border-transparent">
                 <i class="ph-bold ph-x text-sm"></i>
             </button>
         </div>
@@ -216,14 +216,14 @@
             <div class="flex-[1.8] p-6 md:p-8 overflow-y-auto table-scroll bg-black/20" style="background-image: radial-gradient(circle at top right, rgba(67,97,238,0.05) 0%, transparent 50%);">
                 
                 <div class="flex flex-wrap items-center gap-2 mb-4">
-                    <span id="mdl-status" class="px-2.5 py-1 text-[10px] uppercase font-bold rounded-full border tracking-widest"></span>
-                    <span id="mdl-priority" class="px-2.5 py-1 text-[10px] uppercase font-bold rounded-full border tracking-widest"></span>
+                    <span id="mdl-status" class="px-2.5 py-1 text-[10px] uppercase font-bold rounded-full tracking-widest"></span>
+                    <span id="mdl-priority" class="px-2.5 py-1 text-[10px] uppercase font-bold rounded-full tracking-widest"></span>
                 </div>
 
                 <h2 id="mdl-title" class="text-2xl font-bold text-white leading-snug mb-6"></h2>
 
                 <!-- Deskripsi Pekerjaan -->
-                <div class="bg-black/30 border border-white/10 rounded-xl p-5 mb-8">
+                <div class="bg-black/30 rounded-xl p-5 mb-8">
                     <h4 class="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-3 flex items-center"><i class="ph-fill ph-text-align-left mr-1.5 text-sm"></i> Deskripsi Pekerjaan</h4>
                     <div id="mdl-desc" class="text-sm text-white/80 leading-relaxed whitespace-pre-wrap font-medium"></div>
                 </div>
@@ -232,18 +232,18 @@
                 <div id="mdl-checklists-container" class="mb-8 hidden"></div>
 
                 <!-- Diskusi / Komentar (Injeksi AJAX) -->
-                <div class="border-t border-white/10 pt-6">
+                <div class="border-t pt-6">
                     <h4 class="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-4 flex items-center"><i class="ph-fill ph-chats mr-1.5 text-sm"></i> Diskusi & Aktivitas</h4>
                     
                     <div id="mdl-comments-container" class="space-y-3 mb-5"></div>
                     
                     <!-- Form Input Komentar -->
-                    <form onsubmit="submitComment(event)" class="bg-black/30 p-3 rounded-2xl border border-white/10 flex items-end gap-3 mt-4">
+                    <form onsubmit="submitComment(event)" class="bg-black/30 p-3 rounded-2xl flex items-end gap-3 mt-4">
                         <input type="hidden" name="ticket_id" id="mdl-comment-ticket-id">
                         <div class="flex-1">
                             <textarea name="comment_text" rows="1" class="w-full bg-transparent border-0 text-sm text-white focus:ring-0 resize-none px-2 py-1 placeholder-white/30" placeholder="Tulis komentar atau update progres..." required></textarea>
                         </div>
-                        <button type="submit" class="w-10 h-10 shrink-0 rounded-xl bg-blue-600 hover:bg-blue-500 text-white flex items-center justify-center transition-colors shadow-lg">
+                        <button type="submit" class="w-10 h-10 shrink-0 rounded-xl bg-blue-600 hover:bg-blue-500 text-white flex items-center justify-center transition-colors">
                             <i class="ph-fill ph-paper-plane-right"></i>
                         </button>
                     </form>
@@ -251,9 +251,9 @@
             </div>
 
             <!-- Sisi Kanan (Metadata, File, Aksi) -->
-            <div class="flex-1 p-6 md:p-8 border-t md:border-t-0 md:border-l border-white/10 bg-[#1a1a35] flex flex-col overflow-y-auto table-scroll">
+            <div class="flex-1 p-6 md:p-8 border-t md:border-t-0 md:border-l bg-[#1a1a35] flex flex-col overflow-y-auto table-scroll">
                 
-                <h3 class="text-sm font-bold text-white mb-6 border-b border-white/10 pb-3 flex items-center">
+                <h3 class="text-sm font-bold text-white mb-6 border-b pb-3 flex items-center">
                     <i class="ph-fill ph-info text-blue-400 mr-2 text-lg"></i> Informasi Tiket
                 </h3>
 
@@ -274,7 +274,7 @@
                     </div>
 
                     <!-- Lampiran File (Injeksi AJAX) -->
-                    <div id="mdl-attachments-section" class="hidden border-t border-white/5 pt-6 mt-6">
+                    <div id="mdl-attachments-section" class="hidden border-t pt-6 mt-6">
                         <p class="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-3">Lampiran File</p>
                         <div id="mdl-attachments-container" class="space-y-2"></div>
                     </div>
@@ -282,13 +282,13 @@
 
                 <!-- Footer Modal (Hanya Tampil Jika User = Leader) -->
                 <?php if($user['role_global'] === 'leader'): ?>
-                <div class="pt-6 mt-6 border-t border-white/10 space-y-3 shrink-0">
+                <div class="pt-6 mt-6 border-t space-y-3 shrink-0">
                     <a id="mdl-edit-btn" href="#" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-bold shadow-[0_0_15px_rgba(67,97,238,0.3)] transition-all active:scale-95 flex items-center justify-center">
                         <i class="ph-bold ph-pencil-simple mr-1.5"></i> Edit / Tambah Sub-Task
                     </a>
                     <form id="mdl-delete-form" action="<?= base_url('tickets/delete') ?>" method="POST" class="m-0" onsubmit="return confirm('Hapus tugas ini secara permanen?')">
                         <input type="hidden" name="id" id="mdl-delete-id" value="">
-                        <button type="submit" class="w-full py-2.5 rounded-xl bg-red-500/10 hover:bg-red-500/20 text-red-400 text-xs font-bold transition-colors border border-red-500/20 flex items-center justify-center">
+                        <button type="submit" class="w-full py-2.5 rounded-xl bg-red-500/10 hover:bg-red-500/20 text-red-400 text-xs font-bold transition-colors border-red-500/20 flex items-center justify-center">
                             <i class="ph-bold ph-trash mr-1.5"></i> Hapus Tugas
                         </button>
                     </form>
@@ -392,23 +392,23 @@
         // Badge Status & Prioritas
         const statusBadge = document.getElementById('mdl-status');
         statusBadge.innerText = t.ticket_status.replace('_', ' ');
-        statusBadge.className = 'px-2.5 py-1 text-[10px] uppercase font-bold rounded-full border tracking-widest ';
+        statusBadge.className = 'px-2.5 py-1 text-[10px] uppercase font-bold rounded-full  tracking-widest ';
         const statusColors = {
-            'open': 'bg-white/10 text-white border-white/20',
+            'open': 'bg-white/10 text-white ',
             'in_progress': 'bg-blue-500/20 text-blue-300 border-blue-500/30',
             'review': 'bg-purple-500/20 text-purple-300 border-purple-500/30',
             'done': 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
             'blocked': 'bg-red-500/20 text-red-300 border-red-500/30',
-            'cancelled': 'bg-gray-500/20 text-gray-400 border-gray-500/30'
+            'cancelled': 'bg-gray-500/20 text-gray-400 '
         };
         statusBadge.className += (statusColors[t.ticket_status] || statusColors['open']);
 
         const pBadge = document.getElementById('mdl-priority');
         pBadge.innerText = t.priority;
-        pBadge.className = 'px-2.5 py-1 text-[10px] uppercase font-bold rounded-full border tracking-widest ';
+        pBadge.className = 'px-2.5 py-1 text-[10px] uppercase font-bold rounded-full  tracking-widest ';
         if(t.priority === 'high') pBadge.classList.add('bg-orange-500/20', 'text-orange-400', 'border-orange-500/30');
         else if(t.priority === 'urgent') pBadge.classList.add('bg-red-500/20', 'text-red-400', 'border-red-500/30');
-        else pBadge.classList.add('bg-white/10', 'text-white/50', 'border-white/20');
+        else pBadge.classList.add('bg-white/10', 'text-white/50', '');
 
         // Deskripsi Pekerjaan
         const emptyState = '<span class="text-white/30 italic">Tidak ada deskripsi yang dilampirkan pada tugas ini...</span>';
@@ -421,22 +421,22 @@
             const nameInitial = t.assignee_name ? t.assignee_name.charAt(0).toUpperCase() : 'U';
             
             if (t.assignee_avatar) {
-                avatarHtml = `<img src="<?= base_url() ?>/${t.assignee_avatar}?v=<?= time() ?>" class="w-8 h-8 rounded-full object-cover shadow-sm border border-white/20 shrink-0" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(t.assignee_name || 'User')}&background=4361ee&color=fff&size=128';">`;
+                avatarHtml = `<img src="<?= base_url() ?>/${t.assignee_avatar}?v=<?= time() ?>" class="w-8 h-8 rounded-full object-cover shrink-0" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(t.assignee_name || 'User')}&background=4361ee&color=fff&size=128';">`;
             } else {
-                avatarHtml = `<div class="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-xs shadow-sm shrink-0" style="background: linear-gradient(135deg, #4361ee, #7209b7);">${nameInitial}</div>`;
+                avatarHtml = `<div class="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-xs shrink-0" style="background: linear-gradient(135deg, #4361ee, #7209b7);">${nameInitial}</div>`;
             }
             
             let waHtml = '';
             <?php if($user['role_global'] === 'leader'): ?>
             if (t.assignee_phone) {
                 let waText = encodeURIComponent(`Halo ${t.assignee_name.split(' ')[0]}, reminder untuk tugas *${t.title}*. Mohon di-update progressnya ya. Semangat! 🚀`);
-                waHtml = `<a href="https://wa.me/${t.assignee_phone.replace(/[^0-9]/g, '')}?text=${waText}" target="_blank" onclick="event.stopPropagation()" class="text-emerald-400 bg-emerald-500/10 ml-3 px-2.5 py-1 rounded-lg border border-emerald-500/20 hover:bg-emerald-500/20 transition-all flex items-center gap-1.5 shrink-0" title="Ping via WA"><i class="ph-fill ph-whatsapp-logo text-sm"></i> <span class="text-[9px] uppercase tracking-widest font-bold">Reminder</span></a>`;
+                waHtml = `<a href="https://wa.me/${t.assignee_phone.replace(/[^0-9]/g, '')}?text=${waText}" target="_blank" onclick="event.stopPropagation()" class="text-emerald-400 bg-emerald-500/10 ml-3 px-2.5 py-1 rounded-2xl border-emerald-500/20 hover:bg-emerald-500/20 transition-all flex items-center gap-1.5 shrink-0" title="Ping via WA"><i class="ph-fill ph-whatsapp-logo text-sm"></i> <span class="text-[9px] uppercase tracking-widest font-bold">Reminder</span></a>`;
             }
             <?php endif; ?>
             
             picContainer.innerHTML = `${avatarHtml} <span class="text-sm font-bold text-white/90 ml-3 truncate max-w-[150px]">${escapeHtml(t.assignee_name || 'User')}</span> ${waHtml}`;
         } else {
-            picContainer.innerHTML = `<div class="w-8 h-8 rounded-full bg-white/5 border border-dashed border-white/20 flex items-center justify-center text-white/30 shrink-0"><i class="ph-fill ph-user-minus"></i></div> <span class="text-sm font-medium text-white/40 ml-3 italic">Unassigned</span>`;
+            picContainer.innerHTML = `<div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-white/30 shrink-0"><i class="ph-fill ph-user-minus"></i></div> <span class="text-sm font-medium text-white/40 ml-3 italic">Unassigned</span>`;
         }
         
         // Metadata Kanan
@@ -460,8 +460,8 @@
                 const isChecked = c.is_done == 1 ? 'checked' : '';
                 const lineThrough = c.is_done == 1 ? 'line-through text-white/40' : 'text-white/90';
                 chkHtml += `
-                    <label class="flex items-start gap-3 p-3 rounded-xl bg-white/5 border border-white/10 cursor-pointer hover:bg-white/10 transition">
-                        <input type="checkbox" class="mt-0.5 rounded border-white/20 bg-black/50 text-blue-500 focus:ring-0 cursor-pointer" onchange="toggleChecklistAPI(${c.id}, this)" ${isChecked}>
+                    <label class="flex items-start gap-3 p-3 rounded-xl bg-white/5 cursor-pointer hover:bg-white/10 transition">
+                        <input type="checkbox" class="mt-0.5 rounded bg-black/50 text-blue-500 focus:ring-0 cursor-pointer" onchange="toggleChecklistAPI(${c.id}, this)" ${isChecked}>
                         <span class="text-sm font-medium ${lineThrough} transition-all">${escapeHtml(c.item_text)}</span>
                     </label>
                 `;
@@ -486,7 +486,7 @@
                 let date = new Date(c.created_at).toLocaleString('id-ID', {day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'});
 
                 cmtHtml += `
-                    <div class="flex gap-3 bg-white/5 p-4 rounded-2xl border border-white/5 shadow-sm">
+                    <div class="flex gap-3 bg-white/5 p-4 rounded-2xl">
                         ${avatar}
                         <div>
                             <div class="flex items-baseline gap-2 mb-1.5">
@@ -500,7 +500,7 @@
             });
             cmtContainer.innerHTML = cmtHtml;
         } else {
-            cmtContainer.innerHTML = '<p class="text-xs text-white/30 italic text-center py-5 bg-white/5 rounded-xl border border-dashed border-white/10">Belum ada diskusi atau komentar. Jadilah yang pertama!</p>';
+            cmtContainer.innerHTML = '<p class="text-xs text-white/30 italic text-center py-5 bg-white/5 rounded-xl">Belum ada diskusi atau komentar. Jadilah yang pertama!</p>';
         }
 
         // Set ID di Form Komentar
@@ -513,8 +513,8 @@
             let attHtml = '';
             attachments.forEach(a => {
                 attHtml += `
-                    <a href="<?= base_url() ?>/${a.file_path}" target="_blank" class="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition group text-decoration-none shadow-sm">
-                        <div class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center shrink-0">
+                    <a href="<?= base_url() ?>/${a.file_path}" target="_blank" class="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 transition group text-decoration-none">
+                        <div class="w-8 h-8 rounded-2xl bg-blue-500/20 text-blue-400 flex items-center justify-center shrink-0">
                             <i class="ph-fill ph-file text-lg"></i>
                         </div>
                         <div class="flex-1 overflow-hidden">

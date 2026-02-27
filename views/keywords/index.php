@@ -6,7 +6,7 @@
 </div>
 
 <?php if(isset($success_msg)): ?>
-    <div class="mb-6 p-4 rounded-[50px] bg-emerald-500/10 border border-emerald-500/20 text-sm text-emerald-300 flex items-center shadow-lg backdrop-blur-md relative z-40">
+    <div class="mb-6 p-4 rounded-[50px] bg-emerald-500/10 border-emerald-500/20 text-sm text-emerald-300 flex items-center backdrop-blur-md relative z-40">
         <i class="ph-fill ph-check-circle text-xl mr-3 text-emerald-400"></i> <?= htmlspecialchars($success_msg) ?>
     </div>
 <?php endif; ?>
@@ -15,31 +15,31 @@
     
     <!-- Form Tambah Cepat (Kiri) -->
     <div class="lg:col-span-4">
-        <form action="<?= base_url('keywords/store') ?>" method="POST" class="bg-white/5 backdrop-blur-xl p-6 rounded-[28px] border border-white/10 shadow-lg sticky top-6">
-            <h3 class="font-bold text-white/90 mb-5 border-b border-white/10 pb-3 flex items-center text-sm uppercase tracking-wider">
+        <form action="<?= base_url('keywords/store') ?>" method="POST" class="bg-ios-cardLight dark:bg-ios-cardDark backdrop-blur-3xl shadow-[0_4px_24px_rgba(0,0,0,0.04)] dark:shadow-none active:scale-[0.98] transition-transform duration-200 p-6 rounded-[28px] sticky top-6">
+            <h3 class="font-bold text-white/90 mb-5 border-b pb-3 flex items-center text-sm uppercase tracking-wider">
                 <i class="ph-bold ph-plus-circle mr-2 text-blue-400 text-lg"></i> Tambah Keyword
             </h3>
             
             <div class="space-y-5">
                 <div>
                     <label class="block text-xs font-semibold text-white/60 mb-2 uppercase tracking-wide">Keyword / Query <span class="text-red-400">*</span></label>
-                    <input type="text" name="keyword_text" class="w-full px-4 py-3 bg-black/30 border border-white/10 rounded-2xl text-white focus:ring-2 focus:ring-white/20 focus:border-white/30 outline-none transition-all text-sm placeholder-white/30" required placeholder="Contoh: jasa seo jakarta">
+                    <input type="text" name="keyword_text" class="w-full px-4 py-3 bg-black/30 rounded-2xl text-white focus:ring-2 focus:ring-white/20 focus: outline-none transition-all text-sm placeholder-white/30" required placeholder="Contoh: jasa seo jakarta">
                 </div>
                 
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="block text-xs font-semibold text-white/60 mb-2 uppercase tracking-wide">Volume</label>
-                        <input type="number" name="volume" class="w-full px-4 py-3 bg-black/30 border border-white/10 rounded-2xl text-white focus:ring-2 focus:ring-white/20 focus:border-white/30 outline-none transition-all text-sm placeholder-white/30" placeholder="e.g 1000">
+                        <input type="number" name="volume" class="w-full px-4 py-3 bg-black/30 rounded-2xl text-white focus:ring-2 focus:ring-white/20 focus: outline-none transition-all text-sm placeholder-white/30" placeholder="e.g 1000">
                     </div>
                     <div>
                         <label class="block text-xs font-semibold text-white/60 mb-2 uppercase tracking-wide">Diff (KD)</label>
-                        <input type="number" step="0.1" name="difficulty" class="w-full px-4 py-3 bg-black/30 border border-white/10 rounded-2xl text-white focus:ring-2 focus:ring-white/20 focus:border-white/30 outline-none transition-all text-sm placeholder-white/30" placeholder="e.g 45">
+                        <input type="number" step="0.1" name="difficulty" class="w-full px-4 py-3 bg-black/30 rounded-2xl text-white focus:ring-2 focus:ring-white/20 focus: outline-none transition-all text-sm placeholder-white/30" placeholder="e.g 45">
                     </div>
                 </div>
                 
                 <div>
                     <label class="block text-xs font-semibold text-white/60 mb-2 uppercase tracking-wide">Intent</label>
-                    <select name="intent" class="w-full px-4 py-3 bg-black/30 border border-white/10 rounded-2xl text-white focus:ring-2 focus:ring-white/20 focus:border-white/30 outline-none transition-all text-sm appearance-none cursor-pointer">
+                    <select name="intent" class="w-full px-4 py-3 bg-black/30 rounded-2xl text-white focus:ring-2 focus:ring-white/20 focus: outline-none transition-all text-sm appearance-none cursor-pointer">
                         <option value="informational" class="bg-gray-900 text-white">Informational</option>
                         <option value="commercial" class="bg-gray-900 text-white">Commercial</option>
                         <option value="transactional" class="bg-gray-900 text-white">Transactional</option>
@@ -52,7 +52,7 @@
                     <label class="block text-xs font-semibold text-white/60 mb-2 uppercase tracking-wide">Cluster Topik (Opsional)</label>
                     <div class="flex gap-2">
                         <div class="relative flex-1">
-                            <select name="cluster_id" class="w-full pl-4 pr-10 py-3 bg-black/30 border border-white/10 rounded-2xl text-white focus:ring-2 focus:ring-white/20 focus:border-white/30 outline-none transition-all text-sm appearance-none cursor-pointer">
+                            <select name="cluster_id" class="w-full pl-4 pr-10 py-3 bg-black/30 rounded-2xl text-white focus:ring-2 focus:ring-white/20 focus: outline-none transition-all text-sm appearance-none cursor-pointer">
                                 <option value="" class="bg-gray-900 text-white/50">-- Tanpa Cluster --</option>
                                 <?php foreach($clusters as $cls): ?>
                                     <option value="<?= $cls['id'] ?>" class="bg-gray-900 text-white"><?= htmlspecialchars($cls['cluster_name']) ?></option>
@@ -60,7 +60,7 @@
                             </select>
                             <i class="ph-bold ph-caret-down absolute right-4 top-1/2 -translate-y-1/2 text-white/40 pointer-events-none"></i>
                         </div>
-                        <button type="button" onclick="addCluster()" class="w-12 flex-shrink-0 flex items-center justify-center bg-blue-600/20 hover:bg-blue-600 border border-blue-500/30 rounded-2xl text-blue-400 hover:text-white transition-all shadow-sm" title="Buat Cluster Baru">
+                        <button type="button" onclick="addCluster()" class="w-12 flex-shrink-0 flex items-center justify-center bg-blue-600/20 hover:bg-blue-600 border-blue-500/30 rounded-2xl text-blue-400 hover:text-white transition-all" title="Buat Cluster Baru">
                             <i class="ph-bold ph-plus text-lg"></i>
                         </button>
                     </div>
@@ -68,14 +68,14 @@
                 
                 <div>
                     <label class="block text-xs font-semibold text-white/60 mb-2 uppercase tracking-wide">Prioritas</label>
-                    <select name="priority" class="w-full px-4 py-3 bg-black/30 border border-white/10 rounded-2xl text-white focus:ring-2 focus:ring-white/20 focus:border-white/30 outline-none transition-all text-sm appearance-none cursor-pointer">
+                    <select name="priority" class="w-full px-4 py-3 bg-black/30 rounded-2xl text-white focus:ring-2 focus:ring-white/20 focus: outline-none transition-all text-sm appearance-none cursor-pointer">
                         <option value="high" class="bg-gray-900 text-white">Tinggi (High)</option>
                         <option value="medium" selected class="bg-gray-900 text-white">Sedang (Medium)</option>
                         <option value="low" class="bg-gray-900 text-white">Rendah (Low)</option>
                     </select>
                 </div>
                 
-                <div class="pt-4 border-t border-white/10 mt-2">
+                <div class="pt-4 border-t mt-2">
                     <button type="submit" class="w-full py-3.5 flex items-center justify-center bg-white text-black rounded-full shadow-[0_0_20px_rgba(255,255,255,0.2)] text-sm font-bold hover:scale-[1.02] active:scale-95 transition-all">
                         <i class="ph-bold ph-floppy-disk mr-2 text-lg"></i> Simpan Keyword
                     </button>
@@ -86,10 +86,10 @@
 
     <!-- Tabel Data Keywords (Kanan) -->
     <div class="lg:col-span-8">
-        <div class="bg-white/5 backdrop-blur-xl rounded-[28px] border border-white/10 shadow-lg overflow-hidden flex flex-col h-full min-h-[60vh]">
-            <div class="px-6 py-5 border-b border-white/10 bg-transparent flex justify-between items-center">
+        <div class="bg-ios-cardLight dark:bg-ios-cardDark backdrop-blur-3xl shadow-[0_4px_24px_rgba(0,0,0,0.04)] dark:shadow-none active:scale-[0.98] transition-transform duration-200 rounded-[28px] overflow-hidden flex flex-col h-full min-h-[60vh]">
+            <div class="px-6 py-5 border-b bg-transparent flex justify-between items-center">
                 <h3 class="font-bold text-white/90 text-sm uppercase tracking-wider">Database Keyword</h3>
-                <span class="text-xs font-medium bg-black/30 px-3 py-1 rounded-lg text-white/50 border border-white/5"><?= count($keywords) ?> Kata Kunci</span>
+                <span class="text-xs font-medium bg-black/30 px-3 py-1 rounded-2xl text-white/50"><?= count($keywords) ?> Kata Kunci</span>
             </div>
 
             <div class="overflow-x-auto scrollbar-hide flex-grow">
@@ -152,15 +152,15 @@
                                 <td class="px-6 py-4 text-center whitespace-nowrap">
                                     <?php 
                                         $sColor = [
-                                            'new' => 'bg-white/10 text-white/80 border-white/20',
+                                            'new' => 'bg-white/10 text-white/80 ',
                                             'planned' => 'bg-purple-500/20 text-purple-300 border-purple-500/30',
                                             'used' => 'bg-blue-500/20 text-blue-300 border-blue-500/30',
                                             'won' => 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
-                                            'ignored' => 'bg-gray-500/20 text-gray-400 border-gray-500/30'
-                                        ][$k['keyword_status']] ?? 'bg-white/10 text-white/80 border-white/20';
+                                            'ignored' => 'bg-gray-500/20 text-gray-400 '
+                                        ][$k['keyword_status']] ?? 'bg-white/10 text-white/80 ';
                                     ?>
                                     <div class="relative inline-flex items-center">
-                                        <select onchange="updateKwStatus(<?= $k['id'] ?>, this.value)" class="appearance-none bg-transparent border text-[9px] font-bold uppercase tracking-wider py-1 pl-3 pr-7 rounded-full cursor-pointer focus:outline-none <?= $sColor ?> backdrop-blur-md transition-all shadow-sm">
+                                        <select onchange="updateKwStatus(<?= $k['id'] ?>, this.value)" class="appearance-none bg-transparent text-[9px] font-bold uppercase tracking-wider py-1 pl-3 pr-7 rounded-full cursor-pointer focus:outline-none <?= $sColor ?> backdrop-blur-md transition-all">
                                             <option value="new" class="bg-gray-900 text-white" <?= $k['keyword_status'] == 'new' ? 'selected' : '' ?>>NEW</option>
                                             <option value="planned" class="bg-gray-900 text-white" <?= $k['keyword_status'] == 'planned' ? 'selected' : '' ?>>PLANNED</option>
                                             <option value="used" class="bg-gray-900 text-white" <?= $k['keyword_status'] == 'used' ? 'selected' : '' ?>>USED (CONTENT)</option>
@@ -184,7 +184,7 @@
                                 <td class="px-6 py-4 text-center whitespace-nowrap">
                                     <form action="<?= base_url('keywords/delete') ?>" method="POST" class="m-0 inline-block" onsubmit="return confirm('Hapus keyword ini?')">
                                         <input type="hidden" name="id" value="<?= $k['id'] ?>">
-                                        <button type="submit" class="flex items-center justify-center w-8 h-8 rounded-lg bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 text-red-400 transition-colors shadow-sm">
+                                        <button type="submit" class="flex items-center justify-center w-8 h-8 rounded-2xl bg-red-500/10 hover:bg-red-500/20 border-red-500/20 text-red-400 transition-colors">
                                             <i class="ph-bold ph-trash text-sm"></i>
                                         </button>
                                     </form>

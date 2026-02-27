@@ -54,12 +54,12 @@
      FLASH MESSAGES
      ============================================================== -->
 <?php if(isset($success_msg)): ?>
-    <div class="mb-6 p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-sm text-emerald-300 flex items-center shadow-[0_0_15px_rgba(52,211,153,0.1)] backdrop-blur-md relative z-20">
+    <div class="mb-6 p-4 rounded-2xl bg-emerald-500/10 border-emerald-500/20 text-sm text-emerald-300 flex items-center shadow-[0_0_15px_rgba(52,211,153,0.1)] backdrop-blur-md relative z-20">
         <i class="ph-fill ph-check-circle text-xl mr-3 text-emerald-400"></i> <?= htmlspecialchars($success_msg) ?>
     </div>
 <?php endif; ?>
 <?php if(isset($error_msg)): ?>
-    <div class="mb-6 p-4 rounded-2xl bg-red-500/10 border border-red-500/20 text-sm text-red-300 flex items-center shadow-[0_0_15px_rgba(244,63,94,0.1)] backdrop-blur-md relative z-20">
+    <div class="mb-6 p-4 rounded-2xl bg-red-500/10 border-red-500/20 text-sm text-red-300 flex items-center shadow-[0_0_15px_rgba(244,63,94,0.1)] backdrop-blur-md relative z-20">
         <i class="ph-fill ph-warning-circle text-xl mr-3 text-red-400"></i> <?= htmlspecialchars($error_msg) ?>
     </div>
 <?php endif; ?>
@@ -71,8 +71,8 @@
     
     <!-- KOLOM KIRI: UPLOAD FORM -->
     <div class="lg:col-span-1">
-        <form action="<?= base_url('creative/store') ?>" method="POST" enctype="multipart/form-data" class="bg-white/5 backdrop-blur-xl p-6 rounded-[24px] border border-white/10 shadow-lg sticky top-6">
-            <h3 class="font-bold text-white/90 mb-5 border-b border-white/10 pb-3 flex items-center">
+        <form action="<?= base_url('creative/store') ?>" method="POST" enctype="multipart/form-data" class="bg-ios-cardLight dark:bg-ios-cardDark backdrop-blur-3xl shadow-[0_4px_24px_rgba(0,0,0,0.04)] dark:shadow-none active:scale-[0.98] transition-transform duration-200 p-6 rounded-[24px] sticky top-6">
+            <h3 class="font-bold text-white/90 mb-5 border-b pb-3 flex items-center">
                 <i class="ph ph-upload-simple text-blue-400 mr-2 text-lg"></i> Unggah Aset Baru
             </h3>
             
@@ -94,12 +94,12 @@
                 <div>
                     <label class="block text-xs font-bold text-white/50 uppercase tracking-wider mb-1.5">Pilih File *</label>
                     <div class="relative">
-                        <input type="file" name="asset_file" class="w-full px-3 py-2 border border-white/20 border-dashed rounded-xl text-sm text-white/70 bg-white/5 cursor-pointer focus:outline-none file:mr-4 file:py-1.5 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 transition-all" required>
+                        <input type="file" name="asset_file" class="w-full px-3 py-2 rounded-xl text-sm text-white/70 bg-white/5 cursor-pointer focus:outline-none file:mr-4 file:py-1.5 file:px-4 file:rounded-2xl file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 transition-all" required>
                     </div>
                     <p class="text-[10px] text-white/40 mt-2"><i class="ph ph-info mr-1"></i> Maks. 20MB (MP4, JPG, PNG)</p>
                 </div>
                 
-                <button type="submit" class="w-full mt-2 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl text-sm font-bold shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center">
+                <button type="submit" class="w-full mt-2 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl text-sm font-bold hover: hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center">
                     <i class="ph ph-cloud-arrow-up mr-2 text-lg"></i> Simpan ke Library
                 </button>
             </div>
@@ -109,7 +109,7 @@
     <!-- KOLOM KANAN: GRID ASSETS -->
     <div class="lg:col-span-3">
         <?php if(empty($assets)): ?>
-            <div class="bg-white/5 backdrop-blur-xl p-12 rounded-[24px] border border-dashed border-white/20 shadow-lg text-center text-white/40 flex flex-col items-center justify-center min-h-[400px]">
+            <div class="bg-ios-cardLight dark:bg-ios-cardDark backdrop-blur-3xl shadow-[0_4px_24px_rgba(0,0,0,0.04)] dark:shadow-none active:scale-[0.98] transition-transform duration-200 p-12 rounded-[24px] text-center text-white/40 flex flex-col items-center justify-center min-h-[400px]">
                 <div class="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mb-4">
                     <i class="ph-fill ph-folder-open text-5xl text-white/30"></i>
                 </div>
@@ -121,7 +121,7 @@
                 <?php foreach($assets as $a): ?>
                     
                     <!-- KARTU ASET KREATIF -->
-                    <div class="bg-[#121226]/80 backdrop-blur-md rounded-[20px] border border-white/10 shadow-lg overflow-hidden group hover:border-blue-400/50 hover:shadow-[0_10px_30px_rgba(59,130,246,0.15)] transition-all duration-300 flex flex-col h-[280px]">
+                    <div class="bg-[#121226]/80 backdrop-blur-md rounded-[20px] overflow-hidden group hover:shadow-[0_10px_30px_rgba(59,130,246,0.15)] transition-all duration-300 flex flex-col h-[280px]">
                         
                         <!-- Thumbnail Area (Klik untuk Preview) -->
                         <div class="relative h-44 w-full bg-black/40 overflow-hidden cursor-pointer flex-shrink-0 flex items-center justify-center" 
@@ -136,7 +136,7 @@
                                     <!-- #t=0.1 trik untuk mengambil frame pertama video sebagai thumbnail di browser -->
                                     <video src="<?= base_url($a['file_path']) ?>#t=0.1" class="w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-500" preload="metadata"></video>
                                     <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                                        <div class="w-12 h-12 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center border border-white/20 shadow-lg group-hover:bg-blue-600/80 transition-colors">
+                                        <div class="w-12 h-12 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center group-hover:bg-blue-600/80 transition-colors">
                                             <i class="ph-fill ph-play text-white text-xl ml-1"></i>
                                         </div>
                                     </div>
@@ -155,17 +155,17 @@
                             <div class="absolute top-3 left-3">
                                 <?php 
                                     $typeColor = 'bg-gray-500/80 text-white';
-                                    if($a['asset_type'] == 'video') $typeColor = 'bg-purple-600/90 text-white border border-purple-400/50';
-                                    if($a['asset_type'] == 'image') $typeColor = 'bg-emerald-600/90 text-white border border-emerald-400/50';
+                                    if($a['asset_type'] == 'video') $typeColor = 'bg-purple-600/90 text-white  border-purple-400/50';
+                                    if($a['asset_type'] == 'image') $typeColor = 'bg-emerald-600/90 text-white  border-emerald-400/50';
                                 ?>
-                                <span class="px-2.5 py-1 text-[9px] uppercase font-bold rounded-lg backdrop-blur-md shadow-sm <?= $typeColor ?>">
+                                <span class="px-2.5 py-1 text-[9px] uppercase font-bold rounded-2xl backdrop-blur-md <?= $typeColor ?>">
                                     <?= htmlspecialchars($a['asset_type']) ?>
                                 </span>
                             </div>
 
                             <!-- Tombol Download Cepat -->
                             <?php if($a['file_path']): ?>
-                                <a href="<?= base_url($a['file_path']) ?>" target="_blank" download class="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors shadow-sm opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0" title="Download Aset" onclick="event.stopPropagation()">
+                                <a href="<?= base_url($a['file_path']) ?>" target="_blank" download class="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0" title="Download Aset" onclick="event.stopPropagation()">
                                     <i class="ph-bold ph-download-simple"></i>
                                 </a>
                             <?php endif; ?>
@@ -179,7 +179,7 @@
                                 </h4>
                             </div>
                             
-                            <div class="flex items-center justify-between mt-3 pt-3 border-t border-white/10">
+                            <div class="flex items-center justify-between mt-3 pt-3 border-t">
                                 <div class="flex items-center text-xs text-white/50 font-medium">
                                     <div class="w-5 h-5 rounded-full bg-gradient-to-tr from-blue-500 to-indigo-500 text-white flex items-center justify-center text-[8px] font-bold mr-2">
                                         <?= strtoupper(substr($a['uploader_name'] ?? 'S', 0, 1)) ?>
@@ -206,10 +206,10 @@
     <div class="absolute inset-0 bg-black/80 backdrop-blur-md cursor-pointer" onclick="closePreview()"></div>
     
     <!-- Modal Content Box -->
-    <div id="modalContent" class="relative z-10 w-full max-w-5xl bg-[#111126] border border-white/10 rounded-3xl shadow-[0_25px_50px_rgba(0,0,0,0.5)] flex flex-col md:flex-row overflow-hidden scale-95 opacity-0 max-h-[90vh]">
+    <div id="modalContent" class="relative z-10 w-full max-w-5xl bg-[#111126] rounded-3xl shadow-[0_25px_50px_rgba(0,0,0,0.5)] flex flex-col md:flex-row overflow-hidden scale-95 opacity-0 max-h-[90vh]">
         
         <!-- Tombol Close Melayang (Mobile & Desktop) -->
-        <button onclick="closePreview()" class="absolute top-4 right-4 z-50 w-10 h-10 rounded-full bg-black/50 backdrop-blur-md border border-white/10 text-white flex items-center justify-center hover:bg-red-500 hover:border-red-500 transition-all">
+        <button onclick="closePreview()" class="absolute top-4 right-4 z-50 w-10 h-10 rounded-full bg-black/50 backdrop-blur-md text-white flex items-center justify-center hover:bg-red-500 transition-all">
             <i class="ph-bold ph-x text-xl"></i>
         </button>
 
@@ -221,9 +221,9 @@
         </div>
 
         <!-- Details Area (Kanan / Bawah) -->
-        <div class="w-full md:w-80 p-6 sm:p-8 flex flex-col border-t md:border-t-0 md:border-l border-white/5 bg-[#1a1a35]">
+        <div class="w-full md:w-80 p-6 sm:p-8 flex flex-col border-t md:border-t-0 md:border-l bg-[#1a1a35]">
             <div class="mb-6">
-                <span id="modalTypeBadge" class="inline-block px-3 py-1 mb-3 text-[10px] uppercase font-bold rounded-lg border bg-blue-500/20 text-blue-300 border-blue-500/30 tracking-wider">
+                <span id="modalTypeBadge" class="inline-block px-3 py-1 mb-3 text-[10px] uppercase font-bold rounded-2xl bg-blue-500/20 text-blue-300 border-blue-500/30 tracking-wider">
                     TYPE
                 </span>
                 <h2 id="modalTitle" class="text-xl font-bold text-white leading-snug">Judul Aset</h2>
@@ -245,8 +245,8 @@
             </div>
 
             <!-- Tombol Aksi di Modal -->
-            <div class="mt-8 pt-6 border-t border-white/10 flex flex-col gap-3">
-                <a id="modalDownloadBtn" href="#" target="_blank" download class="w-full py-3 bg-white text-black rounded-xl text-sm font-bold shadow-lg hover:bg-gray-200 transition-colors flex items-center justify-center">
+            <div class="mt-8 pt-6 border-t flex flex-col gap-3">
+                <a id="modalDownloadBtn" href="#" target="_blank" download class="w-full py-3 bg-white text-black rounded-xl text-sm font-bold hover:bg-gray-200 transition-colors flex items-center justify-center">
                     <i class="ph-bold ph-download-simple mr-2 text-lg"></i> Unduh File Asli
                 </a>
             </div>
@@ -286,13 +286,13 @@
         mediaContainer.innerHTML = '';
         
         if (type === 'image') {
-            mediaContainer.innerHTML = `<img src="${url}" class="max-w-full max-h-full object-contain rounded-xl shadow-2xl drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]">`;
+            mediaContainer.innerHTML = `<img src="${url}" class="max-w-full max-h-full object-contain rounded-xl drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]">`;
         } else if (type === 'video') {
-            mediaContainer.innerHTML = `<video src="${url}" controls autoplay class="max-w-full max-h-full rounded-xl shadow-2xl drop-shadow-[0_0_30px_rgba(0,0,0,0.5)] outline-none"></video>`;
+            mediaContainer.innerHTML = `<video src="${url}" controls autoplay class="max-w-full max-h-full rounded-xl drop-shadow-[0_0_30px_rgba(0,0,0,0.5)] outline-none"></video>`;
         } else {
             mediaContainer.innerHTML = `
                 <div class="text-center text-white/50 flex flex-col items-center">
-                    <div class="w-24 h-24 rounded-full bg-white/5 flex items-center justify-center mb-4 border border-white/10">
+                    <div class="w-24 h-24 rounded-full bg-white/5 flex items-center justify-center mb-4">
                         <i class="ph ph-file-text text-5xl"></i>
                     </div>
                     <p class="font-medium">Preview tidak tersedia untuk format dokumen.</p>

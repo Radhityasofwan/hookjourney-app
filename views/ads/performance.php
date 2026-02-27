@@ -63,7 +63,7 @@
         </p>
     </div>
     <div class="mt-4 sm:mt-0 space-x-2">
-        <a href="<?= base_url('ads/import') ?>" class="btn px-4 py-2.5 rounded-xl shadow-lg text-sm font-semibold flex items-center transition-all hover:scale-105" 
+        <a href="<?= base_url('ads/import') ?>" class="btn px-4 py-2.5 rounded-xl text-sm font-semibold flex items-center transition-all hover:scale-105" 
            style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; backdrop-filter: blur(10px);">
             <i class="ph ph-upload-simple mr-2 text-lg"></i> Import Laporan Baru
         </a>
@@ -73,7 +73,7 @@
 <!-- ==============================================================
      PANEL FILTER DATA DINAMIS (SERVER-SIDE)
      ============================================================== -->
-<form method="GET" action="<?= base_url('ads/performance') ?>" class="bg-white/5 backdrop-blur-xl p-5 rounded-[24px] border border-white/10 shadow-lg mb-8 flex flex-col md:flex-row gap-4 md:items-end relative z-20">
+<form method="GET" action="<?= base_url('ads/performance') ?>" class="bg-ios-cardLight dark:bg-ios-cardDark backdrop-blur-3xl shadow-[0_4px_24px_rgba(0,0,0,0.04)] dark:shadow-none active:scale-[0.98] transition-transform duration-200 p-5 rounded-[24px] mb-8 flex flex-col md:flex-row gap-4 md:items-end relative z-20">
     
     <!-- Rentang Tanggal -->
     <div class="flex-1 min-w-[140px]">
@@ -102,10 +102,10 @@
     
     <!-- Tombol Aksi Filter -->
     <div class="flex gap-2 mt-4 md:mt-0">
-        <button type="submit" class="bg-blue-600 hover:bg-blue-500 text-white px-5 py-2.5 rounded-xl text-sm font-semibold shadow-lg transition-colors flex items-center">
+        <button type="submit" class="bg-blue-600 hover:bg-blue-500 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-colors flex items-center">
             <i class="ph ph-funnel mr-1.5 text-lg"></i> Terapkan
         </button>
-        <a href="<?= base_url('ads/performance') ?>" class="bg-white/10 hover:bg-white/20 text-white px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors flex items-center border border-white/5" title="Reset Filter">
+        <a href="<?= base_url('ads/performance') ?>" class="bg-white/10 hover:bg-white/20 text-white px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors flex items-center" title="Reset Filter">
             <i class="ph ph-arrows-counter-clockwise text-lg"></i>
         </a>
     </div>
@@ -116,19 +116,19 @@
      ============================================================== -->
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 relative z-20">
     
-    <div class="bg-white/5 backdrop-blur-xl p-6 rounded-[24px] border border-white/10 shadow-lg relative overflow-hidden group hover:border-white/20 transition-all flex flex-col justify-center">
+    <div class="bg-ios-cardLight dark:bg-ios-cardDark backdrop-blur-3xl shadow-[0_4px_24px_rgba(0,0,0,0.04)] dark:shadow-none active:scale-[0.98] transition-transform duration-200 p-6 rounded-[24px] relative overflow-hidden group hover: transition-all flex flex-col justify-center">
         <div class="absolute top-0 right-0 w-24 h-24 bg-purple-500/10 rounded-full blur-2xl -mr-10 -mt-10 transition-transform group-hover:scale-150"></div>
         <p class="text-xs font-semibold uppercase tracking-wider text-white/50 mb-1 flex items-center"><i class="ph ph-money text-purple-400 mr-1.5 text-lg"></i> Total Spend</p>
         <h3 class="text-3xl font-bold text-white mt-2"><?= format_rupiah($summary['total_spend']) ?></h3>
     </div>
     
-    <div class="bg-white/5 backdrop-blur-xl p-6 rounded-[24px] border border-white/10 shadow-lg relative overflow-hidden group hover:border-white/20 transition-all flex flex-col justify-center">
+    <div class="bg-ios-cardLight dark:bg-ios-cardDark backdrop-blur-3xl shadow-[0_4px_24px_rgba(0,0,0,0.04)] dark:shadow-none active:scale-[0.98] transition-transform duration-200 p-6 rounded-[24px] relative overflow-hidden group hover: transition-all flex flex-col justify-center">
         <div class="absolute top-0 right-0 w-24 h-24 bg-blue-500/10 rounded-full blur-2xl -mr-10 -mt-10 transition-transform group-hover:scale-150"></div>
         <p class="text-xs font-semibold uppercase tracking-wider text-white/50 mb-1 flex items-center"><i class="ph ph-target text-blue-400 mr-1.5 text-lg"></i> Total Results</p>
         <h3 class="text-3xl font-bold text-white mt-2"><?= format_number($summary['total_results']) ?></h3>
     </div>
     
-    <div class="bg-white/5 backdrop-blur-xl p-6 rounded-[24px] border border-white/10 shadow-lg relative overflow-hidden group hover:border-white/20 transition-all flex flex-col justify-center">
+    <div class="bg-ios-cardLight dark:bg-ios-cardDark backdrop-blur-3xl shadow-[0_4px_24px_rgba(0,0,0,0.04)] dark:shadow-none active:scale-[0.98] transition-transform duration-200 p-6 rounded-[24px] relative overflow-hidden group hover: transition-all flex flex-col justify-center">
         <div class="absolute top-0 right-0 w-24 h-24 bg-emerald-500/10 rounded-full blur-2xl -mr-10 -mt-10 transition-transform group-hover:scale-150"></div>
         <p class="text-xs font-semibold uppercase tracking-wider text-white/50 mb-1 flex items-center"><i class="ph ph-chart-line-down text-emerald-400 mr-1.5 text-lg"></i> Avg. Cost per Result (CPR)</p>
         <h3 class="text-3xl font-bold mt-2 <?= $aggCpr > 0 ? 'text-emerald-400 drop-shadow-[0_0_12px_rgba(52,211,153,0.4)]' : 'text-white' ?>">
@@ -137,7 +137,7 @@
     </div>
     
     <!-- Smart UX Warning untuk CTR -->
-    <div class="bg-white/5 backdrop-blur-xl p-6 rounded-[24px] border border-white/10 shadow-lg relative overflow-hidden group hover:border-white/20 transition-all flex flex-col justify-center">
+    <div class="bg-ios-cardLight dark:bg-ios-cardDark backdrop-blur-3xl shadow-[0_4px_24px_rgba(0,0,0,0.04)] dark:shadow-none active:scale-[0.98] transition-transform duration-200 p-6 rounded-[24px] relative overflow-hidden group hover: transition-all flex flex-col justify-center">
         <div class="absolute top-0 right-0 w-24 h-24 bg-pink-500/10 rounded-full blur-2xl -mr-10 -mt-10 transition-transform group-hover:scale-150"></div>
         <div>
             <p class="text-xs font-semibold uppercase tracking-wider text-white/50 mb-1 flex items-center justify-between">
@@ -151,7 +151,7 @@
         
         <?php if($aggCtr == 0 && $summary['total_impressions'] > 0): ?>
             <!-- Muncul otomatis jika impresi ada tapi klik nol (mengindikasikan kolom terlewat saat export) -->
-            <div class="mt-3 pt-3 border-t border-white/5">
+            <div class="mt-3 pt-3 border-t">
                 <p class="text-[9px] text-pink-200/70 leading-relaxed">
                     <span class="font-bold text-pink-400">Tips:</span> Pastikan metrik <b>Klik (Semua)</b> atau <b>Klik Tautan</b> Anda cantumkan saat Export laporan di Meta Ads Manager.
                 </p>
@@ -164,10 +164,10 @@
 <!-- ==============================================================
      COMPLEX DATA TABLE & LOCAL FILTERS
      ============================================================== -->
-<div class="bg-white/5 backdrop-blur-xl rounded-[24px] border border-white/10 shadow-lg flex flex-col relative z-20 overflow-hidden">
+<div class="bg-ios-cardLight dark:bg-ios-cardDark backdrop-blur-3xl shadow-[0_4px_24px_rgba(0,0,0,0.04)] dark:shadow-none active:scale-[0.98] transition-transform duration-200 rounded-[24px] flex flex-col relative z-20 overflow-hidden">
     
     <!-- Client-Side Toolbar (Local Search & Local Campaign Filter) -->
-    <div class="px-6 py-5 border-b border-white/10 bg-white/5 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
+    <div class="px-6 py-5 border-b bg-white/5 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
         <div>
             <h3 class="font-bold text-white/90 text-lg">Detailed Ads Breakdown</h3>
             <p class="text-xs text-white/40 mt-1"><i class="ph ph-arrows-left-right align-middle"></i> Klik pada header tabel (misal: Spend, CTR) untuk mengurutkan (Sort)</p>
@@ -193,61 +193,61 @@
             
             <thead class="bg-black/20">
                 <tr>
-                    <th rowspan="2" class="px-5 py-3 border-b border-white/10 text-xs font-bold text-white/60 uppercase tracking-wider sticky-col sortable-th group" onclick="sortTable(0, 'string')">
+                    <th rowspan="2" class="px-5 py-3 border-b text-xs font-bold text-white/60 uppercase tracking-wider sticky-col sortable-th group" onclick="sortTable(0, 'string')">
                         <div class="flex items-center">Struktur Kampanye <i class="ph ph-caret-down sort-icon"></i></div>
                     </th>
                     
-                    <th colspan="3" class="px-5 py-2 border-b border-l border-white/5 text-center text-[10.5px] font-bold text-purple-300 uppercase tracking-widest bg-purple-900/10">
+                    <th colspan="3" class="px-5 py-2 border-b border-l text-center text-[10.5px] font-bold text-purple-300 uppercase tracking-widest bg-purple-900/10">
                         Konversi (Conversion)
                     </th>
-                    <th colspan="4" class="px-5 py-2 border-b border-l border-white/5 text-center text-[10.5px] font-bold text-blue-300 uppercase tracking-widest bg-blue-900/10">
+                    <th colspan="4" class="px-5 py-2 border-b border-l text-center text-[10.5px] font-bold text-blue-300 uppercase tracking-widest bg-blue-900/10">
                         Penayangan (Delivery)
                     </th>
-                    <th colspan="4" class="px-5 py-2 border-b border-l border-white/5 text-center text-[10.5px] font-bold text-emerald-300 uppercase tracking-widest bg-emerald-900/10">
+                    <th colspan="4" class="px-5 py-2 border-b border-l text-center text-[10.5px] font-bold text-emerald-300 uppercase tracking-widest bg-emerald-900/10">
                         Retensi Video (Plays)
                     </th>
                     
-                    <th rowspan="2" class="px-5 py-3 border-b border-l border-white/5 text-center text-xs font-bold text-white/60 uppercase tracking-wider sortable-th group" onclick="sortTable(12, 'string')">
+                    <th rowspan="2" class="px-5 py-3 border-b border-l text-center text-xs font-bold text-white/60 uppercase tracking-wider sortable-th group" onclick="sortTable(12, 'string')">
                         <div class="flex items-center justify-center">Status AI <i class="ph ph-caret-down sort-icon"></i></div>
                     </th>
                 </tr>
                 <tr>
                     <!-- Sub-Kolom Konversi (Data attributes untuk sorting akurat) -->
-                    <th class="px-5 py-2 border-b border-l border-white/5 text-right text-xs font-medium text-white/40 sortable-th hover:text-white group" onclick="sortTable(1, 'number')">
+                    <th class="px-5 py-2 border-b border-l text-right text-xs font-medium text-white/40 sortable-th hover:text-white group" onclick="sortTable(1, 'number')">
                         Spend (Rp) <i class="ph ph-caret-down sort-icon"></i>
                     </th>
-                    <th class="px-5 py-2 border-b border-white/5 text-right text-xs font-medium text-white/40 sortable-th hover:text-white group" onclick="sortTable(2, 'number')">
+                    <th class="px-5 py-2 border-b text-right text-xs font-medium text-white/40 sortable-th hover:text-white group" onclick="sortTable(2, 'number')">
                         Results <i class="ph ph-caret-down sort-icon"></i> <span class="text-[9px] block text-purple-400/50 mt-0.5 pointer-events-none">(Tipe Hasil)</span>
                     </th>
-                    <th class="px-5 py-2 border-b border-white/5 text-right text-xs font-medium text-white/40 sortable-th hover:text-white group" onclick="sortTable(3, 'number')">
+                    <th class="px-5 py-2 border-b text-right text-xs font-medium text-white/40 sortable-th hover:text-white group" onclick="sortTable(3, 'number')">
                         CPR (Rp) <i class="ph ph-caret-down sort-icon"></i>
                     </th>
                     
                     <!-- Sub-Kolom Penayangan -->
-                    <th class="px-5 py-2 border-b border-l border-white/5 text-right text-xs font-medium text-white/40 sortable-th hover:text-white group" onclick="sortTable(4, 'number')">
+                    <th class="px-5 py-2 border-b border-l text-right text-xs font-medium text-white/40 sortable-th hover:text-white group" onclick="sortTable(4, 'number')">
                         Reach <i class="ph ph-caret-down sort-icon"></i>
                     </th>
-                    <th class="px-5 py-2 border-b border-white/5 text-right text-xs font-medium text-white/40 sortable-th hover:text-white group" onclick="sortTable(5, 'number')">
+                    <th class="px-5 py-2 border-b text-right text-xs font-medium text-white/40 sortable-th hover:text-white group" onclick="sortTable(5, 'number')">
                         Impresi <i class="ph ph-caret-down sort-icon"></i>
                     </th>
-                    <th class="px-5 py-2 border-b border-white/5 text-right text-xs font-medium text-white/40 sortable-th hover:text-white group" onclick="sortTable(6, 'number')">
+                    <th class="px-5 py-2 border-b text-right text-xs font-medium text-white/40 sortable-th hover:text-white group" onclick="sortTable(6, 'number')">
                         CPM (Rp) <i class="ph ph-caret-down sort-icon"></i>
                     </th>
-                    <th class="px-5 py-2 border-b border-white/5 text-right text-xs font-medium text-white/40 sortable-th hover:text-white group" onclick="sortTable(7, 'number')">
+                    <th class="px-5 py-2 border-b text-right text-xs font-medium text-white/40 sortable-th hover:text-white group" onclick="sortTable(7, 'number')">
                         CTR (%) <i class="ph ph-caret-down sort-icon"></i>
                     </th>
                     
                     <!-- Sub-Kolom Video -->
-                    <th class="px-5 py-2 border-b border-l border-white/5 text-right text-xs font-medium text-white/40 text-emerald-400/60 sortable-th hover:text-white group" onclick="sortTable(8, 'number')">
+                    <th class="px-5 py-2 border-b border-l text-right text-xs font-medium text-white/40 text-emerald-400/60 sortable-th hover:text-white group" onclick="sortTable(8, 'number')">
                         25% <i class="ph ph-caret-down sort-icon"></i>
                     </th>
-                    <th class="px-5 py-2 border-b border-white/5 text-right text-xs font-medium text-white/40 text-emerald-400/70 sortable-th hover:text-white group" onclick="sortTable(9, 'number')">
+                    <th class="px-5 py-2 border-b text-right text-xs font-medium text-white/40 text-emerald-400/70 sortable-th hover:text-white group" onclick="sortTable(9, 'number')">
                         50% <i class="ph ph-caret-down sort-icon"></i>
                     </th>
-                    <th class="px-5 py-2 border-b border-white/5 text-right text-xs font-medium text-white/40 text-emerald-400/80 sortable-th hover:text-white group" onclick="sortTable(10, 'number')">
+                    <th class="px-5 py-2 border-b text-right text-xs font-medium text-white/40 text-emerald-400/80 sortable-th hover:text-white group" onclick="sortTable(10, 'number')">
                         75% <i class="ph ph-caret-down sort-icon"></i>
                     </th>
-                    <th class="px-5 py-2 border-b border-white/5 text-right text-xs font-medium text-white/40 text-emerald-400 sortable-th hover:text-white group" onclick="sortTable(11, 'number')">
+                    <th class="px-5 py-2 border-b text-right text-xs font-medium text-white/40 text-emerald-400 sortable-th hover:text-white group" onclick="sortTable(11, 'number')">
                         100% <i class="ph ph-caret-down sort-icon"></i>
                     </th>
                 </tr>
@@ -273,18 +273,18 @@
                     <tr class="hover:bg-white/5 transition-colors group data-row">
                         
                         <!-- Col 0: Hierarchy (Disisipkan atribut data-val untuk sorting dan class untuk filter) -->
-                        <td class="px-5 py-4 sticky-col group-hover:bg-[#111126] border-r border-white/5 min-w-[320px] max-w-[400px]" data-val="<?= htmlspecialchars($camp['campaign_name']) ?>">
+                        <td class="px-5 py-4 sticky-col group-hover:bg-[#111126] border-r min-w-[320px] max-w-[400px]" data-val="<?= htmlspecialchars($camp['campaign_name']) ?>">
                             <div class="flex flex-col gap-1.5 searchable-text">
                                 <p class="text-[10px] text-white/40 uppercase tracking-wide truncate camp-name-val" title="<?= htmlspecialchars($camp['campaign_name']) ?>">
                                     <i class="ph ph-folder text-purple-400/70 mr-1"></i> <?= htmlspecialchars($camp['campaign_name']) ?>
                                 </p>
                                 <?php if(!empty($camp['adset_name'])): ?>
-                                <p class="text-xs text-white/70 truncate pl-3 border-l border-white/10 ml-1.5" title="<?= htmlspecialchars($camp['adset_name']) ?>">
+                                <p class="text-xs text-white/70 truncate pl-3 border-l ml-1.5" title="<?= htmlspecialchars($camp['adset_name']) ?>">
                                     <i class="ph ph-users-three text-blue-400/70 mr-1"></i> <?= htmlspecialchars($camp['adset_name']) ?>
                                 </p>
                                 <?php endif; ?>
                                 <?php if(!empty($camp['ad_name'])): ?>
-                                <p class="text-sm font-semibold text-white/90 truncate pl-6 border-l border-white/10 ml-1.5" title="<?= htmlspecialchars($camp['ad_name']) ?>">
+                                <p class="text-sm font-semibold text-white/90 truncate pl-6 border-l ml-1.5" title="<?= htmlspecialchars($camp['ad_name']) ?>">
                                     <i class="ph ph-monitor-play text-emerald-400 mr-1"></i> <?= htmlspecialchars($camp['ad_name']) ?>
                                 </p>
                                 <?php endif; ?>
@@ -292,11 +292,11 @@
                         </td>
 
                         <!-- Col 1, 2, 3: Konversi -->
-                        <td class="px-5 py-4 text-sm text-white/70 text-right bg-purple-900/5 border-l border-white/5 align-top pt-5" data-val="<?= $camp['spend'] ?>"><?= format_number($camp['spend']) ?></td>
+                        <td class="px-5 py-4 text-sm text-white/70 text-right bg-purple-900/5 border-l align-top pt-5" data-val="<?= $camp['spend'] ?>"><?= format_number($camp['spend']) ?></td>
                         <td class="px-5 py-4 text-right bg-purple-900/5 align-top pt-5" data-val="<?= $camp['results'] ?>">
                             <p class="text-sm font-medium text-white"><?= format_number($camp['results']) ?></p>
                             <?php if(!empty($camp['result_types'])): ?>
-                                <p class="text-[9px] text-purple-300/80 mt-1.5 uppercase tracking-wide truncate max-w-[120px] ml-auto border border-purple-500/20 bg-purple-500/10 px-1.5 py-0.5 rounded" title="<?= htmlspecialchars($camp['result_types']) ?>">
+                                <p class="text-[9px] text-purple-300/80 mt-1.5 uppercase tracking-wide truncate max-w-[120px] ml-auto border-purple-500/20 bg-purple-500/10 px-1.5 py-0.5 rounded" title="<?= htmlspecialchars($camp['result_types']) ?>">
                                     <?= htmlspecialchars($camp['result_types']) ?>
                                 </p>
                             <?php endif; ?>
@@ -304,7 +304,7 @@
                         <td class="px-5 py-4 text-sm font-bold text-purple-300 text-right bg-purple-900/5 align-top pt-5" data-val="<?= $camp['cpr'] ?>"><?= format_rupiah($camp['cpr']) ?></td>
 
                         <!-- Col 4, 5, 6, 7: Delivery -->
-                        <td class="px-5 py-4 text-sm text-white/60 text-right bg-blue-900/5 border-l border-white/5 align-top pt-5" data-val="<?= $camp['reach'] ?>"><?= format_number($camp['reach']) ?></td>
+                        <td class="px-5 py-4 text-sm text-white/60 text-right bg-blue-900/5 border-l align-top pt-5" data-val="<?= $camp['reach'] ?>"><?= format_number($camp['reach']) ?></td>
                         <td class="px-5 py-4 text-sm text-white/60 text-right bg-blue-900/5 align-top pt-5" data-val="<?= $camp['impressions'] ?>"><?= format_number($camp['impressions']) ?></td>
                         <td class="px-5 py-4 text-sm text-white/60 text-right bg-blue-900/5 align-top pt-5" data-val="<?= $camp['cpm'] ?>"><?= format_number($camp['cpm']) ?></td>
                         <td class="px-5 py-4 text-sm font-medium <?= $camp['ctr'] == 0 ? 'text-white/30' : 'text-blue-300' ?> text-right bg-blue-900/5 align-top pt-5" data-val="<?= $camp['ctr'] ?>">
@@ -312,23 +312,23 @@
                         </td>
 
                         <!-- Col 8, 9, 10, 11: Video Retention -->
-                        <td class="px-5 py-4 text-sm text-emerald-100/50 text-right bg-emerald-900/5 border-l border-white/5 align-top pt-5" data-val="<?= $camp['video_25'] ?>"><?= format_number($camp['video_25']) ?></td>
+                        <td class="px-5 py-4 text-sm text-emerald-100/50 text-right bg-emerald-900/5 border-l align-top pt-5" data-val="<?= $camp['video_25'] ?>"><?= format_number($camp['video_25']) ?></td>
                         <td class="px-5 py-4 text-sm text-emerald-200/60 text-right bg-emerald-900/5 align-top pt-5" data-val="<?= $camp['video_50'] ?>"><?= format_number($camp['video_50']) ?></td>
                         <td class="px-5 py-4 text-sm text-emerald-300/80 text-right bg-emerald-900/5 align-top pt-5" data-val="<?= $camp['video_75'] ?>"><?= format_number($camp['video_75']) ?></td>
                         <td class="px-5 py-4 text-sm font-semibold text-emerald-400 text-right bg-emerald-900/5 align-top pt-5" data-val="<?= $camp['video_100'] ?>"><?= format_number($camp['video_100']) ?></td>
 
                         <!-- Col 12: Status AI -->
-                        <td class="px-5 py-4 text-center border-l border-white/5 bg-black/10 align-middle" data-val="<?= $statusText ?>">
+                        <td class="px-5 py-4 text-center border-l bg-black/10 align-middle" data-val="<?= $statusText ?>">
                             <?php if($statusText == 'Winner'): ?>
-                                <span class="bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 px-3 py-1.5 text-[10px] rounded-full font-bold uppercase tracking-wider shadow-[0_0_12px_rgba(52,211,153,0.25)] flex items-center justify-center w-max mx-auto">
+                                <span class="bg-emerald-500/20 border-emerald-500/40 text-emerald-300 px-3 py-1.5 text-[10px] rounded-full font-bold uppercase tracking-wider shadow-[0_0_12px_rgba(52,211,153,0.25)] flex items-center justify-center w-max mx-auto">
                                     <i class="ph-fill ph-star mr-1"></i> Winner
                                 </span>
                             <?php elseif($statusText == 'Fatigue'): ?>
-                                <span class="bg-red-500/20 border border-red-500/40 text-red-300 px-3 py-1.5 text-[10px] rounded-full font-bold uppercase tracking-wider flex items-center justify-center w-max mx-auto">
+                                <span class="bg-red-500/20 border-red-500/40 text-red-300 px-3 py-1.5 text-[10px] rounded-full font-bold uppercase tracking-wider flex items-center justify-center w-max mx-auto">
                                     <i class="ph-fill ph-warning-circle mr-1"></i> Fatigue
                                 </span>
                             <?php else: ?>
-                                <span class="bg-white/10 border border-white/20 text-white/70 px-3 py-1.5 text-[10px] rounded-full font-bold uppercase tracking-wider flex items-center justify-center w-max mx-auto">
+                                <span class="bg-white/10 text-white/70 px-3 py-1.5 text-[10px] rounded-full font-bold uppercase tracking-wider flex items-center justify-center w-max mx-auto">
                                     <i class="ph ph-spinner-gap mr-1 animate-spin"></i> Testing
                                 </span>
                             <?php endif; ?>
