@@ -1,0 +1,22 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # 1. BLOKIR AKSES LANGSUNG KE FOLDER SISTEM (SANGAT PENTING!)
+    # Karena folder sistem berada di root public, kita harus memblokirnya agar tidak bisa diakses via browser
+    RewriteRule ^(config|controllers|core|helpers|middlewares|models|services|views)(/.*)?$ - [F,L]
+
+    # 2. ROUTING UTAMA MVC
+    # Arahkan semua request ke index.php, kecuali jika request adalah file (-f) atau folder (-d) nyata (seperti gambar di uploads/)
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php [QSA,L]
+</IfModule>
+
+# Keamanan tambahan: Cegah akses ke file tersembunyi (seperti .env, .git, .htaccess)
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Matikan directory listing (agar orang tidak bisa melihat daftar file/folder)
+Options -Indexes
