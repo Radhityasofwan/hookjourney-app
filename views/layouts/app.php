@@ -158,11 +158,10 @@ $current = current_uri();
             width: 0;
             z-index: 9999;
             opacity: 0;
-            transition: width 0.3s ease, opacity 0.3s ease;
-            box-shadow: 0 0 10px rgba(0, 250, 154, 0.5);
+            transition: width 0.15s linear, opacity 0.15s linear;
         }
 
-        /* --- HARDWARE ACCELERATED AURORA --- */
+        /* --- STATIC AURORA BACKGROUND (No animation = zero GPU overhead) --- */
         .aurora-bg {
             position: fixed;
             top: 0;
@@ -179,11 +178,7 @@ $current = current_uri();
             position: absolute;
             border-radius: 50%;
             filter: blur(140px);
-            opacity: 0.35;
-            animation: float-blob 25s infinite ease-in-out alternate;
-            transform: translateZ(0);
-            /* Hardware Acceleration */
-            will-change: transform;
+            opacity: 0.3;
         }
 
         .blob-1 {
@@ -200,7 +195,6 @@ $current = current_uri();
             height: 45vw;
             bottom: -10%;
             right: -5%;
-            animation-delay: -7s;
         }
 
         .blob-3 {
@@ -209,21 +203,6 @@ $current = current_uri();
             height: 40vw;
             top: 35%;
             left: 35%;
-            animation-delay: -14s;
-        }
-
-        @keyframes float-blob {
-            0% {
-                transform: translate3d(0, 0, 0) scale(1);
-            }
-
-            50% {
-                transform: translate3d(5vw, -5vh, 0) scale(1.05);
-            }
-
-            100% {
-                transform: translate3d(-3vw, 4vh, 0) scale(0.95);
-            }
         }
 
         /* --- SIDEBAR ARCHITECTURE --- */
@@ -238,7 +217,7 @@ $current = current_uri();
             backdrop-filter: var(--ios-blur);
             -webkit-backdrop-filter: var(--ios-blur);
             border-right: 1px solid var(--glass-border);
-            transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.4s;
+            transition: width 0.2s ease-out, transform 0.2s ease-out;
             display: flex;
             flex-direction: column;
             box-shadow: 1px 0 20px rgba(0, 0, 0, 0.1);
@@ -251,7 +230,7 @@ $current = current_uri();
             height: 100vh;
             display: flex;
             flex-direction: column;
-            transition: margin-left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: margin-left 0.2s ease-out;
             position: relative;
             z-index: 10;
         }
@@ -388,7 +367,7 @@ $current = current_uri();
             color: rgba(255, 255, 255, 0.4);
             text-decoration: none;
             border-radius: 50%;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: color 0.15s, background 0.15s;
             position: relative;
         }
 
@@ -551,8 +530,6 @@ $current = current_uri();
             border-radius: 24px !important;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.05) !important;
             color: #ffffff !important;
-            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
-            will-change: transform;
         }
 
         main .card:not(form):active,
@@ -600,23 +577,38 @@ $current = current_uri();
         html:not(.dark) main .text-white:not(.btn):not(button):not([class*="btn-"]):not([class*="bg-"]) {
             color: #1c1c1e !important;
         }
-        
+
         html:not(.dark) main [class*="text-white/"]:not(.btn):not(button):not([class*="btn-"]):not([class*="bg-"]) {
             color: rgba(28, 28, 30, 0.6) !important;
         }
 
         /* Adaptasi warna teks pastel menjadi gelap (High Contrast) di Light Mode */
-        html:not(.dark) main [class*="text-purple-300"], html:not(.dark) main [class*="text-purple-200"], html:not(.dark) main [class*="text-purple-400"] {
-            color: #6b21a8 !important; /* purple-800 */
+        html:not(.dark) main [class*="text-purple-300"],
+        html:not(.dark) main [class*="text-purple-200"],
+        html:not(.dark) main [class*="text-purple-400"] {
+            color: #6b21a8 !important;
+            /* purple-800 */
         }
-        html:not(.dark) main [class*="text-blue-300"], html:not(.dark) main [class*="text-blue-200"], html:not(.dark) main [class*="text-blue-400"] {
-            color: #1e40af !important; /* blue-800 */
+
+        html:not(.dark) main [class*="text-blue-300"],
+        html:not(.dark) main [class*="text-blue-200"],
+        html:not(.dark) main [class*="text-blue-400"] {
+            color: #1e40af !important;
+            /* blue-800 */
         }
-        html:not(.dark) main [class*="text-emerald-300"], html:not(.dark) main [class*="text-emerald-400"], html:not(.dark) main [class*="text-emerald-200"] {
-            color: #065f46 !important; /* emerald-800 */
+
+        html:not(.dark) main [class*="text-emerald-300"],
+        html:not(.dark) main [class*="text-emerald-400"],
+        html:not(.dark) main [class*="text-emerald-200"] {
+            color: #065f46 !important;
+            /* emerald-800 */
         }
-        html:not(.dark) main [class*="text-pink-300"], html:not(.dark) main [class*="text-pink-400"], html:not(.dark) main [class*="text-pink-200"] {
-            color: #9d174d !important; /* pink-800 */
+
+        html:not(.dark) main [class*="text-pink-300"],
+        html:not(.dark) main [class*="text-pink-400"],
+        html:not(.dark) main [class*="text-pink-200"] {
+            color: #9d174d !important;
+            /* pink-800 */
         }
 
 
@@ -657,7 +649,7 @@ $current = current_uri();
     </style>
 </head>
 
-<body class="bg-ios-bgLight dark:bg-ios-bgDark text-black dark:text-white pb-safe transition-colors duration-300">
+<body class="bg-ios-bgLight dark:bg-ios-bgDark text-black dark:text-white pb-safe">
 
     <!-- Native App Progress Bar -->
     <div id="ios-loader"></div>
@@ -1061,50 +1053,48 @@ $current = current_uri();
     <script>
         const loader = document.getElementById('ios-loader');
 
-        // Show progress bar on HTMX request
-        document.body.addEventListener('htmx:send', function (e) {
-            loader.style.width = '30%';
+        // Show progress bar instantly on request start
+        document.body.addEventListener('htmx:beforeRequest', function () {
+            loader.style.width = '40%';
             loader.style.opacity = '1';
         });
 
-        // Hide progress bar on HTMX complete and update active classes
-        document.body.addEventListener('htmx:afterOnLoad', function (e) {
-            // Fill loader
+        // htmx:afterSettle fires AFTER the new content is fully in DOM
+        // This is the correct event to re-run page scripts and update nav
+        document.body.addEventListener('htmx:afterSettle', function (e) {
+            // Complete progress bar
             loader.style.width = '100%';
 
-            // Re-eval scripts inside new content
+            // Re-evaluate inline scripts inside new content so page-level JS runs
             const newContent = document.getElementById('content-body');
             if (newContent) {
-                const scripts = newContent.querySelectorAll('script');
-                scripts.forEach(s => {
-                    const newScript = document.createElement('script');
-                    Array.from(s.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
-                    newScript.textContent = s.textContent;
-                    document.body.appendChild(newScript).parentNode.removeChild(newScript);
+                newContent.querySelectorAll('script').forEach(oldScript => {
+                    const s = document.createElement('script');
+                    Array.from(oldScript.attributes).forEach(a => s.setAttribute(a.name, a.value));
+                    s.textContent = oldScript.textContent;
+                    oldScript.parentNode.replaceChild(s, oldScript);
                 });
             }
 
-            // Update active state in nav links
-            const currentPath = new URL(e.detail.requestConfig.path, window.location.origin).pathname;
+            // Update active nav state based on current URL
+            const currentPath = window.location.pathname;
             document.querySelectorAll('a.spa-link').forEach(link => {
-                const linkPath = new URL(link.href).pathname;
+                const linkPath = new URL(link.href, window.location.origin).pathname;
                 const icon = link.querySelector('i');
-                if (linkPath === currentPath || (currentPath === '/' && linkPath.endsWith('/dashboard'))) {
+                const isActive = linkPath === currentPath ||
+                    (currentPath === '/' && linkPath.endsWith('/dashboard')) ||
+                    (currentPath.startsWith(linkPath) && linkPath !== '/' && linkPath.split('/').length > 2);
+
+                if (isActive) {
                     link.classList.add('active');
-                    if (icon && icon.classList.contains('ph')) {
-                        icon.classList.remove('ph');
-                        icon.classList.add('ph-fill');
-                    }
+                    if (icon) { icon.classList.remove('ph'); icon.classList.add('ph-fill'); }
                 } else {
                     link.classList.remove('active');
-                    if (icon && icon.classList.contains('ph-fill')) {
-                        icon.classList.remove('ph-fill');
-                        icon.classList.add('ph');
-                    }
+                    if (icon) { icon.classList.remove('ph-fill'); icon.classList.add('ph'); }
                 }
             });
 
-            // Close mobile sidebar if open
+            // Close mobile sidebar after navigation
             if (window.innerWidth < 992) {
                 const s = document.getElementById('sidebar');
                 const b = document.getElementById('sidebarBackdrop');
@@ -1112,17 +1102,18 @@ $current = current_uri();
                 if (b) b.classList.remove('show');
             }
 
-            // Scroll to top
+            // Scroll content area back to top
             const scrollArea = document.getElementById('main-scroll-area');
             if (scrollArea) scrollArea.scrollTop = 0;
 
+            // Hide progress bar quickly
             setTimeout(() => {
                 loader.style.opacity = '0';
-                setTimeout(() => loader.style.width = '0', 300);
-            }, 300);
+                loader.style.width = '0';
+            }, 150);
         });
 
-        // Handle Error
+        // On error, navigate directly (fallback)
         document.body.addEventListener('htmx:responseError', function (e) {
             window.location.href = e.detail.requestConfig.path;
         });
