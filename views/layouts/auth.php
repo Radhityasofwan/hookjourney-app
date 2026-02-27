@@ -1,3 +1,10 @@
+<?php
+/**
+ * HOOKJOURNEY - GROWTH OPS HUB
+ * Auth Layout: views/layouts/auth.php
+ * Konsisten dengan app.php: Static aurora, glass card, teks kontras tinggi.
+ */
+?>
 <!DOCTYPE html>
 <html lang="id" class="antialiased">
 
@@ -5,20 +12,17 @@
     <meta charset="UTF-8">
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Login - <?= APP_NAME ?></title>
+    <title>Login — <?= APP_NAME ?></title>
 
-    <meta name="theme-color" content="#F2F2F7" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#060609">
 
-    <!-- Script anti-kedip (FOUC) mendeteksi tema HP pengguna -->
+    <!-- Script anti-kedip (FOUC) -->
     <script>
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
         }
     </script>
-
-    <!-- Bootstrap 5.3 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -32,10 +36,6 @@
                     },
                     colors: {
                         ios: {
-                            bgLight: '#F2F2F7',
-                            bgDark: '#000000',
-                            cardLight: '#FFFFFF',
-                            cardDark: '#1C1C1E',
                             blue: '#007AFF',
                         }
                     }
@@ -44,116 +44,186 @@
         }
     </script>
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <style>
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.06);
+            --glass-border: rgba(255, 255, 255, 0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
         body {
-            font-family: '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', sans-serif;
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0;
-            overflow: hidden;
+            background: #060609;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        /* --- EFEK LIQUID AURORA --- */
+        /* --- STATIC AURORA (konsisten dengan app.php — no animation) --- */
         .aurora-bg {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
         }
 
         .blob {
             position: absolute;
             border-radius: 50%;
-            filter: blur(90px);
-            opacity: 0.7;
-            animation: float 12s infinite ease-in-out alternate;
+            filter: blur(100px);
+            opacity: 0.35;
         }
 
-        /* Kombinasi Warna Premium (Pink, Ungu, Biru) */
         .blob-1 {
-            background: #ff007f;
-            width: 450px;
-            height: 450px;
-            top: -10%;
+            background: #4361ee;
+            width: 500px;
+            height: 500px;
+            top: -15%;
             left: -10%;
         }
 
         .blob-2 {
-            background: #7209b7;
-            width: 550px;
-            height: 550px;
+            background: #7c3aed;
+            width: 600px;
+            height: 600px;
             bottom: -20%;
             right: -10%;
-            animation-delay: -3s;
         }
 
         .blob-3 {
-            background: #4361ee;
+            background: #be185d;
             width: 400px;
             height: 400px;
-            bottom: 10%;
-            left: 15%;
-            animation-delay: -6s;
+            bottom: 5%;
+            left: 20%;
         }
 
-        @keyframes float {
-            0% {
-                transform: translate(0, 0) scale(1);
-            }
-
-            50% {
-                transform: translate(40px, -60px) scale(1.05);
-            }
-
-            100% {
-                transform: translate(-30px, 30px) scale(0.95);
-            }
-        }
-
-        /* --- GLASSMORPHISM CARD --- */
+        /* --- GLASS CARD --- */
         .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(24px);
-            /* Efek kaca buram iOS */
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-top: 1px solid rgba(255, 255, 255, 0.3);
-            border-left: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 28px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3), inset 0px 0px 15px rgba(255, 255, 255, 0.05);
-            padding: 3.5rem 3rem;
-            width: 100%;
-            max-width: 440px;
+            position: relative;
             z-index: 10;
+            background: rgba(15, 12, 30, 0.6);
+            backdrop-filter: blur(40px) saturate(160%);
+            -webkit-backdrop-filter: blur(40px) saturate(160%);
+            border: 1px solid var(--glass-border);
+            border-top-color: rgba(255, 255, 255, 0.2);
+            border-radius: 28px;
+            box-shadow: 0 32px 64px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            padding: 3rem 2.5rem;
+            width: 100%;
+            max-width: 420px;
+        }
+
+        /* --- FORM INPUTS — Dark glass style, teks putih jelas --- */
+        .auth-input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 14px;
+            padding: 0.85rem 1.1rem;
+            font-size: 0.95rem;
+            color: #ffffff;
+            outline: none;
+            transition: border-color 0.15s, box-shadow 0.15s;
+        }
+
+        .auth-input::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .auth-input:focus {
+            border-color: #007AFF;
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.25);
+            background: rgba(255, 255, 255, 0.09);
+        }
+
+        .auth-input.error {
+            border-color: rgba(255, 80, 80, 0.6);
+            box-shadow: 0 0 0 3px rgba(255, 80, 80, 0.15);
+        }
+
+        .auth-label {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.55);
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-btn {
+            width: 100%;
+            background: #007AFF;
+            color: #ffffff;
+            border: none;
+            border-radius: 14px;
+            padding: 0.9rem 1.25rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.15s, transform 0.1s;
+            box-shadow: 0 8px 24px rgba(0, 122, 255, 0.35);
+            letter-spacing: 0.1px;
+        }
+
+        .auth-btn:hover {
+            background: #0066dd;
+        }
+
+        .auth-btn:active {
+            transform: scale(0.97);
+            background: #005ac8;
+        }
+
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
         }
     </style>
 </head>
 
-<body class="bg-ios-bgLight dark:bg-ios-bgDark text-black dark:text-white transition-colors duration-300">
-
-    <!-- Latar Belakang Liquid -->
+<body>
+    <!-- Latar Belakang Static Aurora -->
     <div class="aurora-bg">
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
         <div class="blob blob-3"></div>
     </div>
 
-    <!-- Area Konten Form -->
-    <div class="container d-flex justify-content-center px-4">
+    <!-- Glass Card Wrapper -->
+    <div class="px-4 w-full flex justify-center">
         <div class="glass-card">
-            <div class="text-center mb-5">
-                <h1 class="fw-bold mb-2" style="letter-spacing: -0.5px;"><?= APP_NAME ?></h1>
-                <p class="text-white-50" style="font-size: 0.95rem;">Manajemen operasional multi-brand terpadu.</p>
+
+            <!-- Logo + Header -->
+            <div class="text-center mb-8">
+                <div
+                    class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-white/10 border border-white/20 mb-4">
+                    <i class="ph-fill ph-planet text-white text-2xl"></i>
+                </div>
+                <h1 class="text-2xl font-extrabold text-white tracking-tight mb-1" style="letter-spacing: -0.5px;">
+                    <?= APP_NAME ?>
+                </h1>
+                <p class="text-sm font-medium" style="color: rgba(255,255,255,0.5);">
+                    Manajemen operasional multi-brand terpadu.
+                </p>
             </div>
 
-            <!-- Injeksi file views/auth/login.php -->
+            <!-- Injeksi: views/auth/login.php -->
             <?= $content ?>
 
         </div>
