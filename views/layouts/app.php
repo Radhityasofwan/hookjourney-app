@@ -129,39 +129,93 @@ $current = current_uri();
     <script src="https://unpkg.com/htmx.org@1.9.10"></script>
 
     <style>
-        /* --- CORE THEME: iOS LIQUID GLASS (SOFT & CLEAN) --- */
+        /* ================================================================
+           MASTER THEME SYSTEM — LIGHT & DARK
+           All views inherit these variables automatically.
+        ================================================================ */
+
+        /* --- DARK MODE defaults (Dark is primary to preserve existing design) --- */
         :root {
             --sidebar-w: 280px;
             --sidebar-w-collapsed: 90px;
-            --accent: #ffffff;
-            --glass-bg: rgba(255, 255, 255, 0.04);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --glass-highlight: rgba(255, 255, 255, 0.12);
             --ios-blur: blur(40px) saturate(140%);
+
+            /* Surface colors */
+            --c-bg: #060609;
+            --c-sidebar: rgba(10, 10, 16, 0.75);
+            --c-topbar: rgba(6, 6, 9, 0.55);
+            --c-surface: rgba(255, 255, 255, 0.05);
+            --c-surface-2: rgba(255, 255, 255, 0.08);
+            --c-input: rgba(0, 0, 0, 0.30);
+            --c-input-hover: rgba(0, 0, 0, 0.40);
+            --c-overlay: rgba(0, 0, 0, 0.25);
+
+            /* Borders */
+            --c-border: rgba(255, 255, 255, 0.10);
+            --c-border-hi: rgba(255, 255, 255, 0.18);
+
+            /* Text */
+            --c-text: #ffffff;
+            --c-text-muted: rgba(255, 255, 255, 0.55);
+            --c-text-faint: rgba(255, 255, 255, 0.30);
+
+            /* Nav */
+            --c-nav-link: rgba(255, 255, 255, 0.60);
+            --c-nav-active: rgba(255, 255, 255, 0.12);
+            --c-nav-hover: rgba(255, 255, 255, 0.06);
+
+            /* Aurora */
+            --aurora-bg: #060609;
+
+            /* Legacy aliases (keep existing CSS working) */
+            --glass-bg: var(--c-surface);
+            --glass-border: var(--c-border);
+            --glass-highlight: var(--c-nav-active);
+            --accent: #ffffff;
         }
 
+        /* --- LIGHT MODE overrides --- */
+        html:not(.dark) {
+            --c-bg: #f0f2f8;
+            --c-sidebar: rgba(255, 255, 255, 0.82);
+            --c-topbar: rgba(248, 249, 252, 0.88);
+            --c-surface: rgba(255, 255, 255, 0.75);
+            --c-surface-2: rgba(255, 255, 255, 0.92);
+            --c-input: rgba(0, 0, 0, 0.05);
+            --c-input-hover: rgba(0, 0, 0, 0.08);
+            --c-overlay: rgba(0, 0, 0, 0.06);
+
+            --c-border: rgba(0, 0, 0, 0.10);
+            --c-border-hi: rgba(0, 0, 0, 0.16);
+
+            --c-text: #111118;
+            --c-text-muted: rgba(17, 17, 24, 0.55);
+            --c-text-faint: rgba(17, 17, 24, 0.35);
+
+            --c-nav-link: rgba(17, 17, 24, 0.60);
+            --c-nav-active: rgba(0, 122, 255, 0.10);
+            --c-nav-hover: rgba(0, 0, 0, 0.05);
+
+            --aurora-bg: #e8eef8;
+
+            --glass-bg: var(--c-surface);
+            --glass-border: var(--c-border);
+            --glass-highlight: var(--c-nav-active);
+            --accent: #111118;
+        }
+
+        /* ================================================================
+           CORE BODY & AURORA
+        ================================================================ */
         body {
-            /* Font will be handled by Tailwind mostly, this is fallback */
-            font-family: '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             margin: 0;
             overflow: hidden;
             -webkit-tap-highlight-color: transparent;
+            color: var(--c-text);
+            background: var(--c-bg);
         }
 
-        /* --- SPA NATIVE PROGRESS BAR --- */
-        #ios-loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #2563eb, #00fa9a);
-            width: 0;
-            z-index: 9999;
-            opacity: 0;
-            transition: width 0.15s linear, opacity 0.15s linear;
-        }
-
-        /* --- STATIC AURORA BACKGROUND (No animation = zero GPU overhead) --- */
         .aurora-bg {
             position: fixed;
             top: 0;
@@ -171,14 +225,14 @@ $current = current_uri();
             z-index: -1;
             pointer-events: none;
             overflow: hidden;
-            background: #060609;
+            background: var(--aurora-bg);
         }
 
         .blob {
             position: absolute;
             border-radius: 50%;
             filter: blur(140px);
-            opacity: 0.3;
+            opacity: 0.28;
         }
 
         .blob-1 {
@@ -205,7 +259,29 @@ $current = current_uri();
             left: 35%;
         }
 
-        /* --- SIDEBAR ARCHITECTURE --- */
+        html:not(.dark) .blob {
+            opacity: 0.10;
+        }
+
+
+        /* ================================================================
+           PROGRESS BAR
+        ================================================================ */
+        #ios-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #2563eb, #00fa9a);
+            width: 0;
+            z-index: 9999;
+            opacity: 0;
+            transition: width 0.15s linear, opacity 0.15s linear;
+        }
+
+        /* ================================================================
+           SIDEBAR
+        ================================================================ */
         #sidebar {
             width: var(--sidebar-w);
             height: 100vh;
@@ -213,14 +289,14 @@ $current = current_uri();
             top: 0;
             left: 0;
             z-index: 1080;
-            background: var(--glass-bg);
+            background: var(--c-sidebar);
             backdrop-filter: var(--ios-blur);
             -webkit-backdrop-filter: var(--ios-blur);
-            border-right: 1px solid var(--glass-border);
+            border-right: 1px solid var(--c-border);
             transition: width 0.2s ease-out, transform 0.2s ease-out;
             display: flex;
             flex-direction: column;
-            box-shadow: 1px 0 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 1px 0 20px rgba(0, 0, 0, 0.08);
             overflow-x: hidden;
             white-space: nowrap;
         }
@@ -235,7 +311,9 @@ $current = current_uri();
             z-index: 10;
         }
 
-        /* --- COLLAPSED STATE LOGIC (DESKTOP) --- */
+        /* ================================================================
+           COLLAPSED SIDEBAR (DESKTOP)
+        ================================================================ */
         @media (min-width: 992px) {
             html.sidebar-collapsed #sidebar {
                 width: var(--sidebar-w-collapsed);
@@ -245,14 +323,11 @@ $current = current_uri();
                 margin-left: var(--sidebar-w-collapsed);
             }
 
-            /* Auto Expand Effect on Hover */
             html.sidebar-collapsed #sidebar:hover {
                 width: var(--sidebar-w);
-                background: rgba(15, 15, 20, 0.85);
-                box-shadow: 20px 0 60px rgba(0, 0, 0, 0.6);
+                box-shadow: 20px 0 60px rgba(0, 0, 0, 0.25);
             }
 
-            /* Smoothly hiding text */
             html.sidebar-collapsed #sidebar:not(:hover) .hide-on-collapse {
                 opacity: 0;
                 width: 0 !important;
@@ -309,17 +384,37 @@ $current = current_uri();
             white-space: nowrap;
         }
 
-        /* TOPBAR */
+        /* ================================================================
+           TOPBAR
+        ================================================================ */
         .glass-topbar {
             height: 80px;
-            background: rgba(6, 6, 9, 0.4);
+            background: var(--c-topbar);
             backdrop-filter: var(--ios-blur);
             -webkit-backdrop-filter: var(--ios-blur);
-            border-bottom: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--c-border);
             z-index: 1030;
             flex-shrink: 0;
         }
 
+        /* text in topbar adapts to theme */
+        .glass-topbar,
+        .glass-topbar button,
+        .glass-topbar a {
+            color: var(--c-text) !important;
+        }
+
+        .glass-topbar .text-white-50 {
+            color: var(--c-text-muted) !important;
+        }
+
+        #clock {
+            color: var(--c-text) !important;
+        }
+
+        /* ================================================================
+           SIDEBAR BACKDROP
+        ================================================================ */
         #sidebarBackdrop {
             position: fixed;
             inset: 0;
@@ -335,7 +430,9 @@ $current = current_uri();
             display: block;
         }
 
-        /* --- NATIVE MOBILE BOTTOM NAVIGATION --- */
+        /* ================================================================
+           MOBILE BOTTOM NAV
+        ================================================================ */
         .mobile-bottom-nav {
             position: fixed;
             bottom: max(24px, env(safe-area-inset-bottom));
@@ -344,17 +441,17 @@ $current = current_uri();
             width: calc(100% - 48px);
             max-width: 400px;
             height: 72px;
-            background: rgba(30, 30, 35, 0.45);
+            background: var(--c-sidebar);
             backdrop-filter: blur(40px) saturate(200%);
             -webkit-backdrop-filter: blur(40px) saturate(200%);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            border: 1px solid var(--c-border);
             border-radius: 40px;
             z-index: 1060;
             display: flex;
             align-items: center;
             justify-content: space-around;
             padding: 0 8px;
-            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.2), inset 0 1px 1px var(--c-border-hi);
         }
 
         .nav-item-mobile {
@@ -364,7 +461,7 @@ $current = current_uri();
             justify-content: center;
             width: 56px;
             height: 56px;
-            color: rgba(255, 255, 255, 0.4);
+            color: var(--c-text-faint);
             text-decoration: none;
             border-radius: 50%;
             transition: color 0.15s, background 0.15s;
@@ -373,13 +470,12 @@ $current = current_uri();
 
         .nav-item-mobile:active {
             transform: scale(0.9);
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--c-nav-hover);
         }
 
         .nav-item-mobile.active {
-            color: #ffffff;
-            background: rgba(255, 255, 255, 0.1);
-            box-shadow: inset 0 2px 8px rgba(255, 255, 255, 0.05);
+            color: var(--c-text);
+            background: var(--c-nav-active);
         }
 
         .nav-item-mobile i {
@@ -388,7 +484,7 @@ $current = current_uri();
         }
 
         .nav-item-mobile.active i {
-            filter: drop-shadow(0 2px 8px rgba(255, 255, 255, 0.4));
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
             transform: translateY(-2px);
         }
 
@@ -398,12 +494,14 @@ $current = current_uri();
             bottom: 6px;
             width: 4px;
             height: 4px;
-            background: #ffffff;
+            background: #007AFF;
             border-radius: 50%;
-            box-shadow: 0 0 6px #fff;
+            box-shadow: 0 0 6px #007AFF;
         }
 
-        /* RESPONSIVE LOGIC */
+        /* ================================================================
+           RESPONSIVE
+        ================================================================ */
         @media (max-width: 991.98px) {
             #sidebar {
                 transform: translateX(-100%);
@@ -411,7 +509,7 @@ $current = current_uri();
 
             #sidebar.show {
                 transform: translateX(0);
-                box-shadow: 20px 0 50px rgba(0, 0, 0, 0.5);
+                box-shadow: 20px 0 50px rgba(0, 0, 0, 0.3);
             }
 
             #main-wrapper {
@@ -430,9 +528,11 @@ $current = current_uri();
             }
         }
 
-        /* DESKTOP NAV LINKS */
+        /* ================================================================
+           DESKTOP NAV LINKS
+        ================================================================ */
         .nav-link-glass {
-            color: rgba(255, 255, 255, 0.65);
+            color: var(--c-nav-link);
             border-radius: 14px;
             padding: 0.75rem 1.15rem;
             margin-bottom: 0.35rem;
@@ -441,33 +541,32 @@ $current = current_uri();
             font-size: 0.92rem;
             font-weight: 500;
             text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: color 0.2s, background 0.2s, border-color 0.2s;
             border: 1px solid transparent;
         }
 
         .nav-link-glass:hover {
-            color: #ffffff;
-            background: rgba(255, 255, 255, 0.06);
+            color: var(--c-text);
+            background: var(--c-nav-hover);
         }
 
         .nav-link-glass.active {
-            color: #ffffff;
-            background: var(--glass-highlight);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            font-weight: 500;
+            color: var(--c-text);
+            background: var(--c-nav-active);
+            border-color: var(--c-border);
+            font-weight: 600;
         }
 
         .nav-link-glass i {
             font-size: 1.35rem;
             margin-right: 0.9rem;
-            color: rgba(255, 255, 255, 0.4);
-            transition: all 0.3s;
+            color: var(--c-text-faint);
+            transition: all 0.2s;
         }
 
         .nav-link-glass:hover i,
         .nav-link-glass.active i {
-            color: #ffffff;
+            color: var(--c-text);
         }
 
         .nav-section-title {
@@ -475,28 +574,29 @@ $current = current_uri();
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1.2px;
-            color: rgba(255, 255, 255, 0.35);
+            color: var(--c-text-faint);
             margin: 1.8rem 1.15rem 0.6rem;
-            transition: all 0.3s;
+            transition: all 0.2s;
         }
 
-        /* MAGIC UI OVERRIDES */
+        /* ================================================================
+           GLASS SELECT (BRAND SWITCHER)
+        ================================================================ */
         .glass-select {
-            background: rgba(255, 255, 255, 0.08) !important;
-            border: 1px solid var(--glass-border) !important;
-            color: #ffffff !important;
+            background: var(--c-surface-2) !important;
+            border: 1px solid var(--c-border) !important;
+            color: var(--c-text) !important;
             border-radius: 50px;
             padding: 0.55rem 2.6rem 0.55rem 1.2rem;
             font-size: 0.9rem;
             font-weight: 500;
             cursor: pointer;
             backdrop-filter: var(--ios-blur);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s;
+            transition: background 0.2s;
         }
 
         .glass-select:hover {
-            background: rgba(255, 255, 255, 0.12) !important;
+            background: var(--c-surface) !important;
         }
 
         .glass-select option {
@@ -504,32 +604,43 @@ $current = current_uri();
             color: #fff;
         }
 
+        html:not(.dark) .glass-select option {
+            background: #ffffff;
+            color: #111118;
+        }
+
+        /* ================================================================
+           GLASS BUTTON
+        ================================================================ */
         .btn-glass {
             border-radius: 50px !important;
-            background: rgba(255, 255, 255, 0.1) !important;
-            border: 1px solid var(--glass-border) !important;
+            background: var(--c-surface-2) !important;
+            border: 1px solid var(--c-border) !important;
             backdrop-filter: var(--ios-blur);
-            color: white !important;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            color: var(--c-text) !important;
+            transition: background 0.2s, transform 0.15s;
         }
 
         .btn-glass:hover,
         .btn-glass:active {
-            background: rgba(255, 255, 255, 0.15) !important;
+            background: var(--c-nav-hover) !important;
             transform: scale(0.95);
         }
 
+        /* ================================================================
+           MAIN CONTENT GLASS CARDS (Bootstrap .card, .bg-white overrides)
+        ================================================================ */
         main .bg-white,
         main .bg-gray-50,
         main .card,
         .content-box {
-            background: rgba(255, 255, 255, 0.05) !important;
+            background: var(--c-surface) !important;
             backdrop-filter: var(--ios-blur) !important;
             -webkit-backdrop-filter: var(--ios-blur) !important;
-            border: 1px solid var(--glass-border) !important;
+            border: 1px solid var(--c-border) !important;
             border-radius: 24px !important;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.05) !important;
-            color: #ffffff !important;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08) !important;
+            color: var(--c-text) !important;
         }
 
         main .card:not(form):active,
@@ -537,89 +648,151 @@ $current = current_uri();
             transform: scale(0.96) !important;
         }
 
+        /* ================================================================
+           BOOTSTRAP FORM CONTROLS IN MAIN
+        ================================================================ */
         main .form-control,
         main .form-select {
-            background: rgba(0, 0, 0, 0.3) !important;
-            border: 1px solid rgba(255, 255, 255, 0.1) !important;
-            color: #ffffff !important;
+            background: var(--c-input) !important;
+            border: 1px solid var(--c-border) !important;
+            color: var(--c-text) !important;
             border-radius: 14px !important;
             padding: 0.7rem 1rem;
-            transition: all 0.3s;
+            transition: all 0.2s;
         }
 
         main .form-control:focus,
         main .form-select:focus {
-            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1) !important;
-            border-color: rgba(255, 255, 255, 0.3) !important;
-            background: rgba(0, 0, 0, 0.4) !important;
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.2) !important;
+            border-color: rgba(0, 122, 255, 0.4) !important;
+            background: var(--c-input-hover) !important;
         }
 
         main .form-control::placeholder {
-            color: rgba(255, 255, 255, 0.35) !important;
+            color: var(--c-text-faint) !important;
         }
 
+        /* ================================================================
+           TABLES IN MAIN
+        ================================================================ */
         main table {
-            color: inherit !important;
+            color: var(--c-text) !important;
         }
 
         main th {
             background: transparent !important;
-            border-bottom: 1px solid rgba(128, 128, 128, 0.2) !important;
+            border-bottom: 1px solid var(--c-border) !important;
             font-weight: 600;
         }
 
         main td {
-            border-bottom: 1px solid rgba(128, 128, 128, 0.1) !important;
+            border-bottom: 1px solid var(--c-border) !important;
         }
 
-        /* --- SMART TEXT CONTRAST FOR LIGHT MODE --- */
-        /* Menyesuaikan text-white statis menjadi gelap di Light Mode, kecuali di dalam tombol atau elemen ber-background */
-        html:not(.dark) main .text-white:not(.btn):not(button):not([class*="btn-"]):not([class*="bg-"]) {
-            color: #1c1c1e !important;
+        /* ================================================================
+           TAILWIND UTILITY OVERRIDES — LIGHT MODE TEXT CONTRAST
+           These selectors override hardcoded white/opacity classes in views
+           when the user switches to light mode.
+        ================================================================ */
+
+        /* text-white → dark in light mode (unless inside a colored button/badge) */
+        html:not(.dark) main .text-white:not(.btn):not(button):not([class*="bg-blue"]):not([class*="bg-emerald"]):not([class*="bg-red"]):not([class*="bg-purple"]):not([class*="bg-orange"]):not([class*="bg-amber"]):not([class*="bg-black"]):not([class*="bg-gradient"]) {
+            color: #111118 !important;
         }
 
-        html:not(.dark) main [class*="text-white/"]:not(.btn):not(button):not([class*="btn-"]):not([class*="bg-"]) {
-            color: rgba(28, 28, 30, 0.6) !important;
+        html:not(.dark) main [class*="text-white/"]:not(.btn):not(button):not([class*="bg-"]) {
+            color: rgba(17, 17, 24, 0.6) !important;
         }
 
-        /* Adaptasi warna teks pastel menjadi gelap (High Contrast) di Light Mode */
-        html:not(.dark) main [class*="text-purple-300"],
-        html:not(.dark) main [class*="text-purple-200"],
-        html:not(.dark) main [class*="text-purple-400"] {
+        /* bg-white/N, bg-black/N — flip in light mode */
+        html:not(.dark) main [class*="bg-white/"] {
+            background-color: rgba(0, 0, 0, 0.04) !important;
+        }
+
+        html:not(.dark) main [class*="bg-black/"] {
+            background-color: rgba(0, 0, 0, 0.05) !important;
+        }
+
+        /* Pastel text gets deeper tone in light for contrast */
+        html:not(.dark) main [class*="text-purple-3"],
+        html:not(.dark) main [class*="text-purple-4"] {
             color: #6b21a8 !important;
-            /* purple-800 */
         }
 
-        html:not(.dark) main [class*="text-blue-300"],
-        html:not(.dark) main [class*="text-blue-200"],
-        html:not(.dark) main [class*="text-blue-400"] {
-            color: #1e40af !important;
-            /* blue-800 */
+        html:not(.dark) main [class*="text-blue-3"],
+        html:not(.dark) main [class*="text-blue-4"] {
+            color: #1d4ed8 !important;
         }
 
-        html:not(.dark) main [class*="text-emerald-300"],
-        html:not(.dark) main [class*="text-emerald-400"],
-        html:not(.dark) main [class*="text-emerald-200"] {
+        html:not(.dark) main [class*="text-emerald-3"],
+        html:not(.dark) main [class*="text-emerald-4"] {
             color: #065f46 !important;
-            /* emerald-800 */
         }
 
-        html:not(.dark) main [class*="text-pink-300"],
-        html:not(.dark) main [class*="text-pink-400"],
-        html:not(.dark) main [class*="text-pink-200"] {
+        html:not(.dark) main [class*="text-orange-3"],
+        html:not(.dark) main [class*="text-orange-4"] {
+            color: #9a3412 !important;
+        }
+
+        html:not(.dark) main [class*="text-red-3"],
+        html:not(.dark) main [class*="text-red-4"] {
+            color: #991b1b !important;
+        }
+
+        html:not(.dark) main [class*="text-pink-3"],
+        html:not(.dark) main [class*="text-pink-4"] {
             color: #9d174d !important;
-            /* pink-800 */
         }
 
+        html:not(.dark) main [class*="text-gray-4"],
+        html:not(.dark) main [class*="text-gray-3"] {
+            color: #374151 !important;
+        }
 
+        /* Badge backgrounds: keep colored ones, lighten transparent ones in light mode */
+        html:not(.dark) main [class*="bg-white/1"],
+        html:not(.dark) main [class*="bg-white/2"] {
+            background-color: rgba(0, 0, 0, 0.06) !important;
+        }
+
+        /* Tailwind dark: inputs in views */
+        html:not(.dark) main input[class*="bg-black"],
+        html:not(.dark) main textarea[class*="bg-black"],
+        html:not(.dark) main select[class*="bg-black"],
+        html:not(.dark) main input[class*="bg-transparent"],
+        html:not(.dark) main textarea[class*="bg-transparent"] {
+            background: var(--c-input) !important;
+            color: var(--c-text) !important;
+            border-color: var(--c-border) !important;
+        }
+
+        html:not(.dark) main input::placeholder,
+        html:not(.dark) main textarea::placeholder {
+            color: var(--c-text-faint) !important;
+        }
+
+        /* Dividers & borders */
+        html:not(.dark) main [class*="border-white/"] {
+            border-color: var(--c-border) !important;
+        }
+
+        /* date input color-scheme for light */
+        html:not(.dark) main input[type="date"] {
+            color-scheme: light;
+            color: var(--c-text) !important;
+        }
+
+        /* ================================================================
+           TOAST CAPSULE ALERT
+        ================================================================ */
         .capsule-alert {
-            background: rgba(255, 255, 255, 0.1);
+            background: var(--c-surface-2);
             backdrop-filter: var(--ios-blur);
             -webkit-backdrop-filter: var(--ios-blur);
-            border: 1px solid var(--glass-border);
+            border: 1px solid var(--c-border);
             border-radius: 50px;
-            color: #ffffff;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            color: var(--c-text);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
             padding: 0.65rem 1.25rem;
             display: inline-flex;
             align-items: center;
@@ -649,10 +822,11 @@ $current = current_uri();
     </style>
 </head>
 
-<body class="bg-ios-bgLight dark:bg-ios-bgDark text-black dark:text-white pb-safe">
+<body class="pb-safe">
 
     <!-- Native App Progress Bar -->
     <div id="ios-loader"></div>
+
 
     <!-- AURORA BACKGROUND -->
     <div class="aurora-bg">
