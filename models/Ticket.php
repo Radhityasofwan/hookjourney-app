@@ -1,13 +1,15 @@
 <?php
 
-class Ticket extends Model {
+class Ticket extends Model
+{
     protected $table = 'tickets';
 
     /**
      * Mengambil daftar tiket dengan join ke user assignee dan kategori
      */
-    public function getAllByBrand($brandId) {
-        $sql = "SELECT t.*, 
+    public function getAllByBrand($brandId)
+    {
+        $sql = "SELECT t.id, t.title, t.ticket_status, t.priority, t.due_at, t.created_at, t.category_id, t.assigned_to, t.created_by,
                        u_assign.full_name as assignee_name, 
                        u_creator.full_name as creator_name,
                        c.name as category_name, c.color_hex
@@ -27,7 +29,7 @@ class Ticket extends Model {
                         ELSE 7
                     END,
                     t.due_at ASC, t.created_at DESC";
-                    
+
         $stmt = $this->db->prepare($sql);
         $stmt->execute(['brand_id' => $brandId]);
         return $stmt->fetchAll();

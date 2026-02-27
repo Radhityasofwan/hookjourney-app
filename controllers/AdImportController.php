@@ -1,22 +1,28 @@
 <?php
 
-class AdImportController extends Controller {
+class AdImportController extends Controller
+{
 
-    public function index() {
+    public function index()
+    {
         AuthMiddleware::handle();
-        
-        if (!isset($_SESSION['active_brand_id'])) $this->redirect('dashboard');
-        
+
+        if (!isset($_SESSION['active_brand_id']))
+            $this->redirect('dashboard');
+
         $brandId = $_SESSION['active_brand_id'];
         BrandAccessMiddleware::checkAccess($brandId);
 
         $user = Auth::user();
         $brandModel = $this->model('Brand');
         $brands = $brandModel->getActiveBrandsByUser($user);
-        
+
         $activeBrand = null;
         foreach ($brands as $b) {
-            if ($b['id'] == $brandId) { $activeBrand = $b; break; }
+            if ($b['id'] == $brandId) {
+                $activeBrand = $b;
+                break;
+            }
         }
 
         $db = Database::getInstance()->getConnection();
@@ -26,7 +32,7 @@ class AdImportController extends Controller {
         $stmtAcc->execute([$brandId]);
         $adAccounts = $stmtAcc->fetchAll();
 
-        $sqlHist = "SELECT i.*, a.account_name 
+        $sqlHist = "SELECT i.id, i.file_name, i.import_status, i.created_at, a.account_name 
                     FROM ad_report_imports i 
                     LEFT JOIN ad_accounts a ON i.ad_account_id = a.id 
                     WHERE i.brand_id = ? 
@@ -60,17 +66,20 @@ class AdImportController extends Controller {
         $this->view('ads/import', $data, 'app');
     }
 
-    public function upload() {
+    public function upload()
+    {
         AuthMiddleware::handle();
-        
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') $this->redirect('ads/import');
-        if (!isset($_SESSION['active_brand_id'])) $this->redirect('dashboard');
-        
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST')
+            $this->redirect('ads/import');
+        if (!isset($_SESSION['active_brand_id']))
+            $this->redirect('dashboard');
+
         $brandId = $_SESSION['active_brand_id'];
         BrandAccessMiddleware::checkAccess($brandId);
 
         $adAccountId = $_POST['ad_account_id'] ?? '';
-        
+
         if (empty($adAccountId)) {
             $_SESSION['import_error'] = "Silakan pilih Ad Account terlebih dahulu.";
             $this->redirect('ads/import');
@@ -83,9 +92,9 @@ class AdImportController extends Controller {
             $fileExtension = strtolower(end($fileNameCmps));
 
             $allowedfileExtensions = ['csv', 'xlsx'];
-            
+
             if (in_array($fileExtension, $allowedfileExtensions)) {
-                
+
                 $uploadDir = dirname(APP_PATH) . '/public/uploads/ads_reports/';
                 if (!is_dir($uploadDir)) {
                     mkdir($uploadDir, 0755, true);
@@ -93,11 +102,11 @@ class AdImportController extends Controller {
 
                 $newFileName = time() . '_' . substr(md5($fileName), 0, 10) . '.' . $fileExtension;
                 $destPath = $uploadDir . $newFileName;
-                
+
                 if (move_uploaded_file($fileTmpPath, $destPath)) {
-                    
+
                     $relativePath = 'uploads/ads_reports/' . $newFileName;
-                    
+
                     // FIX: Tambahkan _time() agar hash file selalu unik. 
                     // Ini memungkinkan user upload ulang file yang SAMA PERSIS (Pembaruan Data/Overwrite)
                     $fileHash = md5_file($destPath) . '_' . time();
@@ -107,14 +116,14 @@ class AdImportController extends Controller {
                                   (brand_id, ad_account_id, file_name, file_path, file_hash, import_status, imported_by) 
                                   VALUES (?, ?, ?, ?, ?, 'uploaded', ?)";
                     $stmt = $db->prepare($sqlInsert);
-                    
+
                     try {
                         $stmt->execute([
-                            $brandId, 
-                            $adAccountId, 
-                            $fileName, 
-                            $relativePath, 
-                            $fileHash, 
+                            $brandId,
+                            $adAccountId,
+                            $fileName,
+                            $relativePath,
+                            $fileHash,
                             Auth::user()['id']
                         ]);
                         $_SESSION['import_success'] = "File laporan berhasil diunggah. Sistem sedang menyinkronkan pembaruan data Anda...";
@@ -136,14 +145,15 @@ class AdImportController extends Controller {
         $this->redirect('ads/import');
     }
 
-    public function processQueue() {
+    public function processQueue()
+    {
         header('Content-Type: application/json');
-        
+
         try {
             require_once APP_PATH . '/services/AdsImportService.php';
             $service = new AdsImportService();
             $service->processPendingImports();
-            
+
             echo json_encode(['status' => 'success', 'message' => 'Antrean diproses']);
         } catch (Exception $e) {
             echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
@@ -151,15 +161,18 @@ class AdImportController extends Controller {
         exit;
     }
 
-    public function delete() {
+    public function delete()
+    {
         AuthMiddleware::handle();
-        
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') $this->redirect('ads/import');
-        if (!isset($_SESSION['active_brand_id'])) $this->redirect('dashboard');
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST')
+            $this->redirect('ads/import');
+        if (!isset($_SESSION['active_brand_id']))
+            $this->redirect('dashboard');
 
         $brandId = $_SESSION['active_brand_id'];
         $importId = $_POST['import_id'] ?? null;
-        
+
         if ($importId) {
             $db = Database::getInstance()->getConnection();
             $stmt = $db->prepare("SELECT file_path FROM ad_report_imports WHERE id = ? AND brand_id = ?");

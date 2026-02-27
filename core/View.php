@@ -24,8 +24,10 @@ class View {
         require $viewFile;
         $content = ob_get_clean(); // Masukkan output ke variabel $content
 
-        // Jika menggunakan layout, masukkan $content ke dalam layout
-        if ($layout) {
+        $isHtmxRequest = isset($_SERVER['HTTP_HX_REQUEST']) && $_SERVER['HTTP_HX_REQUEST'] == 'true';
+
+        // Jika menggunakan layout dan bukan request HTMX, masukkan $content ke dalam layout
+        if ($layout && !$isHtmxRequest) {
             $layoutFile = APP_PATH . '/views/layouts/' . $layout . '.php';
             if (file_exists($layoutFile)) {
                 require $layoutFile; // Layout file ini HARUS me-echo $content di dalamnya
@@ -33,7 +35,7 @@ class View {
                 die("Error: Layout '{$layout}' tidak ditemukan di {$layoutFile}");
             }
         } else {
-            // Jika tidak pakai layout (contoh: response raw), tampilkan langsung
+            // Jika tidak pakai layout atau via HTMX, tampilkan langsung
             echo $content;
         }
     }
